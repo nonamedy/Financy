@@ -17,6 +17,7 @@ body{
 
 /* --------------- classes ------------ */
 
+/* Estilo que compôem os estilos dos card*/
 .container-card{
 
     display: flex;
@@ -28,7 +29,7 @@ body{
 
 
 }
-
+/*Cards. Cada pequena seção separada*/
 .card{
 
 
@@ -42,6 +43,7 @@ body{
 
 /* Inputs */
 
+/*Estilo dos inputs direcionados aos inputs*/
 .input-budgets{
 
   background-color: rgb(255, 255, 255);
@@ -63,7 +65,8 @@ body{
 
 .budgets-container{
 
-   
+   display: flex;
+   gap: 20px;
 
 }
 

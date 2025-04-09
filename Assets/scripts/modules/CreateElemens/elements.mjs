@@ -40,6 +40,12 @@ class HtmlComponents {
 
     };
 
+    FormatToMonetary(value){
+
+        return value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+    }
+
 
 };
 
@@ -116,7 +122,7 @@ export class Table extends HtmlComponents {
        
         for(let line=0 ; line < lines; line++){
 
-            tr = this.CreateTR();
+            tr = this.CreateTR(`${'table'}-${line}`);
             
 
             for(let tdline in text){
@@ -233,7 +239,7 @@ export class components extends HtmlComponents {
 
     }
 
-    CreateComponent(h2text = '',table = Node){
+    CreateComponent(h2text = '',table = Object,){
 
         const sect = this.CreateSection();
         const title = this.CreateH2(h2text);
@@ -243,9 +249,9 @@ export class components extends HtmlComponents {
         sect.appendChild(table);
         sect.appendChild(inputs);
 
-        this.AddToDOM(sect)
+        this.AddToDOM(sect);
 
-        return sect
+        return sect;
 
     }
 
@@ -256,8 +262,8 @@ export class Complements extends HtmlComponents{
 
     CreateComplement(utilizado = true){
 
-        const section = this.CreateElements()
-        section.setAttribute('class',this.ElementClass);
+        const section = this.CreateElements();
+        section.setAttribute('class',this.ElementClass = 'complements-container');
 
         const Total_Gasto  = this.complement(0,'Total Gasto','red')
         const Deve_Gastar = this.complement(0,'Deve Gastar','green')
@@ -268,7 +274,7 @@ export class Complements extends HtmlComponents{
         section.appendChild(percentual);
 
         this.AddToDOM(section);
-        console.log(section);
+       
         return section;
 
 
@@ -279,14 +285,14 @@ export class Complements extends HtmlComponents{
         const container = document.createElement('div');
 
         const PrincipalValue = document.createElement('p');
-        PrincipalValue.textContent = data;
+        PrincipalValue.textContent = this.FormatToMonetary(data);
         PrincipalValue.setAttribute('class','data-complement');
     
         if( PrincipalValue !== undefined){
 
-            PrincipalValue.setAttribute('id',id)
+            PrincipalValue.setAttribute('id',id);
 
-        }
+        };
 
         const details = document.createElement('p');
         details.textContent = text;

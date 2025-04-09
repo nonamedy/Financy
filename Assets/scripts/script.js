@@ -1,11 +1,11 @@
 import { Table,components,Complements } from "../scripts/modules/CreateElemens/elements.mjs";
+let bud = document.querySelector('.budgets-container')
+const table = new Table('table',bud,'nãotem')
+const Tela = new components('section',bud,'card')
 
-let cu = new Table('table',document.querySelector('.budgets-container'),'')
-console.log(cu)
-let kk = new components('section',document.querySelector('.budgets-container'),'.card')
-const table = cu.CreateTable(3,1,['Nome','Valor'],[['cu','kisimoto'],'miagi'])
-kk.CreateComponent('Teste incrivel',table)
 
-const complemento = new Complements('section',document.querySelector('body'),'complements-container')
 
+let table1 = table.CreateTable(3,1,['nome','idade','sexo'],['pedro',14,'Masculino'])
+let component  = Tela.CreateComponent('desisto da vida',table1)
+const complemento = new Complements('section',component,'');
 complemento.CreateComplement(true)
