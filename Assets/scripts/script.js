@@ -6,6 +6,6 @@ let kk = new components('section',document.querySelector('.budgets-container'),'
 const table = cu.CreateTable(3,1,['Nome','Valor'],[['cu','kisimoto'],'miagi'])
 kk.CreateComponent('Teste incrivel',table)
 
-const complemento = new Complements('section',document.querySelector('body'),'sla')
+const complemento = new Complements('section',document.querySelector('body'),'complements-container')
 
 complemento.CreateComplement(true)

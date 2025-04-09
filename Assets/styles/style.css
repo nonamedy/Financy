@@ -67,4 +67,42 @@ body{
 
 }
 
+/* Complementos */
+.complements-container{
+
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+
+
+}
+
+.data-complement{
+
+    font-size: 1.6em;
+    font-weight: 550;
+    text-align: center;
+
+}
+
+.details-complement{
+
+
+    font-size: 13px;
+
+}
+
+#red{
+
+    color: rgb(218, 105, 71);
+
+}
+
+#green{
+
+    color:rgb(24, 134, 48);
+
+}
+
 /* ---------------         ------------ */
