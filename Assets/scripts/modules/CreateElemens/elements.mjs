@@ -157,6 +157,8 @@ export class Table extends HtmlComponents {
         this.AddToDOM(table);
         console.log(table)
 
+        return table
+
 
     };
   
@@ -184,24 +186,117 @@ export class components extends HtmlComponents {
 
     CreateSection(){
 
-        const sect = this.CreateElements()
-        const title = this.CreateH2('the best ass of the year')
-        sect.appendChild(this.CreateH2('the best test of the year'))
+        const sect = this.CreateElements();
+        sect.setAttribute('class',this.ElementClass);
 
-        this.AddToDOM(sect)
+        return sect
 
-    }
+      
+    };
 
     CreateH2(text){
 
-        const h2 = document.createElement('h2')
-        h2.textContent = text
-        h2.setAttribute('class','budget-title')
-        return h2
+        const h2 = document.createElement('h2');
+        h2.textContent = text;
+        h2.setAttribute('class','budget-title');
+        return h2;
 
     }
 
-    CreateInputsLabel(){}
+    CreateInputsLabel(idName,idValue){
+
+        const InputsContainer = document.createElement('section');
+        InputsContainer.setAttribute('class','Inputs-Container');
+
+        const InputName = document.createElement('input');
+        InputName.setAttribute('type','text');
+        InputName.setAttribute('placeholder','Nome do custo');
+        InputName.setAttribute('id',idName);
+        InputName.setAttribute('class','input-budgets');
+        
+
+        const InputValue = document.createElement('input');
+        InputValue.setAttribute('type','Number');
+        InputValue.setAttribute('placeholder','R$ 0,00');
+        InputValue.setAttribute('min','0');
+        InputValue.setAttribute('id',idValue);
+        InputValue.setAttribute('class','input-budgets');
+
+        const ADDicon = document.createElement('i');
+        ADDicon.classList = '.ph-fill','.ph-plus-circle';
+
+        InputsContainer.appendChild(InputName);
+        InputsContainer.appendChild(InputValue);
+        InputsContainer.appendChild(ADDicon);
+
+        return InputsContainer;
+
+    }
+
+    CreateComponent(h2text = '',table = Node){
+
+        const sect = this.CreateSection();
+        const title = this.CreateH2(h2text);
+        const inputs = this.CreateInputsLabel();
+        
+        sect.appendChild(title);
+        sect.appendChild(table);
+        sect.appendChild(inputs);
+
+        this.AddToDOM(sect)
+
+        return sect
+
+    }
 
 }
 
+export class Complements extends HtmlComponents{
+
+
+    CreateComplement(utilizado = true){
+
+        const section = this.CreateElements()
+        section.setAttribute('class',this.ElementClass);
+
+        const Total_Gasto  = this.complement(0,'Total Gasto','red')
+        const Deve_Gastar = this.complement(0,'Deve Gastar','green')
+        const percentual = this.complement(0,utilizado == true ?'Utilizado' : 'Percentual')
+    
+        section.appendChild(Total_Gasto);
+        section.appendChild(Deve_Gastar);
+        section.appendChild(percentual);
+
+        this.AddToDOM(section);
+        console.log(section);
+        return section;
+
+
+    }
+
+    complement(data = 0,text,id){
+
+        const container = document.createElement('div');
+
+        const PrincipalValue = document.createElement('p');
+        PrincipalValue.textContent = data;
+        PrincipalValue.setAttribute('class','data-complement');
+    
+        if( PrincipalValue !== undefined){
+
+            PrincipalValue.setAttribute('id',id)
+
+        }
+
+        const details = document.createElement('p');
+        details.textContent = text;
+        details.setAttribute('class','details-complement');
+
+        container.appendChild(PrincipalValue);
+        container.appendChild(details);
+
+        return container;
+
+    }
+
+}
