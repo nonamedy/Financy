@@ -150,7 +150,7 @@ export class Table extends HtmlComponents {
 
     }
 
-    CreateTable(NumberOfbodyLines =1,NumberofHeadLines = 1,HeadData = [],BodyData = []){
+    CreateTable(NumberOfbodyLines =1,NumberofHeadLines = 1,HeadData = [],BodyData = [],InputForEditLAbels){
 
         //Crate the main table
         const table = this.CreateElements();
@@ -161,7 +161,11 @@ export class Table extends HtmlComponents {
 
         
         this.AddToDOM(table);
-        console.log(table)
+        
+        
+     
+        this.EditTableRow(table,InputForEditLAbels)
+        
 
         return table
 
@@ -171,22 +175,44 @@ export class Table extends HtmlComponents {
     // Editing the table
 
 
-    EditTableRow(TableRowID){
+    EditTableRow(table,input){
+
+
+        table.addEventListener('mousedown',(e) => {
+
+            console.log(e.target)
+            let target = e.target
+
+            if(target.nodeName == 'TD'){
+                
+                //acessa a linha pai e seus filhos
+                let trline = target.parentNode
+                let name = trline.cells[0]
+                let value = trline.cells[1]
+                
+                //transforma os th em inputs
+                console.log(input)
+                input.value = name.textContent
+                name.appendChild(input)
+               
+                console.log(target.parentNode)
+                console.log(name,value)
+                
+                
+            }   
+
+            
+        })
+
+
+    };
 
 
 
 
-
-    }
-
-    TransformDataInInputs(){
-
-
-
-    }
     
 
-}
+};
 
 export class components extends HtmlComponents {
 
@@ -209,28 +235,53 @@ export class components extends HtmlComponents {
 
     }
 
-    CreateInputsLabel(idName,idValue){
+    CreateInput(type,placeholder='',id,classes){
+
+        const input = document.createElement('input')
+        input.setAttribute('type',type)
+        input.setAttribute('placeholder',placeholder)
+        input.setAttribute('id',id);
+        input.setAttribute('class',classes);
+        
+        switch(type){
+
+            case 'number':
+
+                input.setAttribute('min','0');
+                
+
+            break;
+            
+            case 'text':
+
+               
+
+            break;
+
+        }
+
+        return input;
+
+
+    }
+
+    CreateInputsLabel(idName,idValue,classe ='Inputs-Container',FieldsClass ='input-budgets' ){
 
         const InputsContainer = document.createElement('section');
-        InputsContainer.setAttribute('class','Inputs-Container');
+        InputsContainer.setAttribute('class',classe);
 
-        const InputName = document.createElement('input');
-        InputName.setAttribute('type','text');
-        InputName.setAttribute('placeholder','Nome do custo');
-        InputName.setAttribute('id',idName);
-        InputName.setAttribute('class','input-budgets');
-        
+        //input for the name of budget
+        const InputName = this.CreateInput('text','Nome do custo',idName,FieldsClass)
 
-        const InputValue = document.createElement('input');
-        InputValue.setAttribute('type','Number');
-        InputValue.setAttribute('placeholder','R$ 0,00');
-        InputValue.setAttribute('min','0');
-        InputValue.setAttribute('id',idValue);
-        InputValue.setAttribute('class','input-budgets');
+        //input for  the value
+        const InputValue = this.CreateInput('number','R$ 0,00',idValue,FieldsClass);
 
+
+        // add-inputs information icon
         const ADDicon = document.createElement('i');
         ADDicon.classList = '.ph-fill','.ph-plus-circle';
 
+        //Add all inputs to your container
         InputsContainer.appendChild(InputName);
         InputsContainer.appendChild(InputValue);
         InputsContainer.appendChild(ADDicon);
@@ -239,11 +290,11 @@ export class components extends HtmlComponents {
 
     }
 
-    CreateComponent(h2text = '',table = Object,){
+    CreateComponent(h2text = '',table = Object){
 
         const sect = this.CreateSection();
         const title = this.CreateH2(h2text);
-        const inputs = this.CreateInputsLabel();
+        const inputs = this.CreateInputsLabel(`${h2text}-Name`,`${h2text}-Value`);
         
         sect.appendChild(title);
         sect.appendChild(table);

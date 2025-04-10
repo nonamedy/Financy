@@ -25,6 +25,8 @@ body{
     flex-wrap: wrap;
     align-items: stretch;
     gap: 15px;
+    overflow-x: none;
+    min-width: fit-content;
     
 
 
@@ -36,12 +38,24 @@ body{
     background-color: rgba(77, 74, 74, 0.377);
     border-radius: 5px;
     padding: 8px;
+    flex-wrap: wrap;
     max-height: 50vh;
+   
+  
 
 
 }
 
-/* Inputs */
+  /*imagino que seja uma classe inutilziada, apagar depois*/
+  .budgets-container{
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+ 
+ }
+
+/* --- Inputs --- */
 
 /*Estilo dos inputs direcionados aos inputs*/
 .input-budgets{
@@ -53,9 +67,11 @@ body{
   border: 1px solid rgba(0, 0, 0, 0.774);
   padding: 4px;
   margin: auto;
+  
 
 }
 
+/*Impede que os inputs tenham o estilo padrão quando focados*/
 .input-budgets:focus{
 
     appearance: none;
@@ -63,14 +79,31 @@ body{
   
   }
 
-.budgets-container{
+/* - Edit Inputs -*/
 
-   display: flex;
-   gap: 20px;
+.Edit-Table-Input{
+
+    background-color: red;
 
 }
 
-/* Complementos */
+.Edit-Field-input{
+
+    color: blue;
+    font-size:12px;
+    background-color: unset;
+    border:none;
+    border-bottom: 1.2px solid red;
+
+}
+
+.Edit-Field-input:focus{
+
+    outline:none;
+
+}
+
+/* --- Complementos --- */
 .complements-container{
 
     display:flex;
@@ -81,6 +114,7 @@ body{
 
 }
 
+/*Estilo referente ao [Total Gasto,DeveGastar,Percentual] dos complementos*/
 .data-complement{
 
     font-size: 1.6em;
@@ -89,6 +123,7 @@ body{
 
 }
 
+/*Estilo referente a mensagem que fica abaixo do [data-complement]*/
 .details-complement{
 
 
@@ -96,12 +131,14 @@ body{
 
 }
 
+/* Estilo de cor para o [Total Gasto]*/
 #red{
 
     color: rgb(218, 105, 71);
 
 }
 
+/* Estilo de cor para o [Deve Gastar]*/
 #green{
 
     color:rgb(24, 134, 48);
@@ -109,3 +146,10 @@ body{
 }
 
 /* ---------------         ------------ */
+
+tr[lineid]{
+
+    background-color: rgba(255, 217, 0, 0.062);
+
+}
+
