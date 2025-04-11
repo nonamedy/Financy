@@ -150,32 +150,25 @@ export class Table extends HtmlComponents {
 
     }
 
-    CreateTable(NumberOfbodyLines =1,NumberofHeadLines = 1,HeadData = [],BodyData = [],InputForEditLAbels){
+    CreateTable(NumberOfbodyLines =1,NumberofHeadLines = 1,HeadData = [],BodyData = [],InputNameForEdit,InputValueForEdit){
 
         //Crate the main table
         const table = this.CreateElements();
 
-        
         table.appendChild(this.CreateThead(NumberofHeadLines,HeadData));
         table.appendChild(this.CreateTbody(NumberOfbodyLines,BodyData));
 
-        
         this.AddToDOM(table);
         
-        
-     
-        this.EditTableRow(table,InputForEditLAbels)
-        
+        this.EditTableRow(table,InputNameForEdit,InputValueForEdit);
 
-        return table
-
+        return table;
 
     };
   
     // Editing the table
 
-
-    EditTableRow(table,input){
+    EditTableRow(table,inputName,inputValue){
 
 
         table.addEventListener('mousedown',(e) => {
@@ -186,21 +179,19 @@ export class Table extends HtmlComponents {
             if(target.nodeName == 'TD'){
                 
                 //acessa a linha pai e seus filhos
-                let trline = target.parentNode
-                let name = trline.cells[0]
-                let value = trline.cells[1]
+                let trline = target.parentNode;
+                let name = trline.cells[0];
+                let value = trline.cells[1];
+        
+          
                 
                 //transforma os th em inputs
-                name.textContent ='slaviu'
+       
                 
-                value.textContent = 'eu tentei'
-
-                
-                
-            }   
+            }
 
             
-        })
+        });
 
 
     };
@@ -233,13 +224,20 @@ export class components extends HtmlComponents {
 
     }
 
-    CreateInput(type,placeholder='',id,classes){
+    CreateInput(type,placeholder='',id='',classes=''){
 
-        const input = document.createElement('input')
-        input.setAttribute('type',type)
-        input.setAttribute('placeholder',placeholder)
-        input.setAttribute('id',id);
-        input.setAttribute('class',classes);
+        const input = document.createElement('input');
+
+        input.setAttribute('type',type);
+        input.setAttribute('placeholder',placeholder);
+
+        if(classes !== ''|| id !== ''){
+
+            input.setAttribute('id',id);
+            input.setAttribute('class',classes);
+
+        }
+        
         
         switch(type){
 
@@ -306,7 +304,7 @@ export class components extends HtmlComponents {
 
 }
 
-export class Complements extends HtmlComponents{
+export class AdicionalInfo extends HtmlComponents{
 
 
     CreateComplement(utilizado = true){
