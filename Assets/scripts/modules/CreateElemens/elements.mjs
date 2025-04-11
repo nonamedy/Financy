@@ -191,12 +191,10 @@ export class Table extends HtmlComponents {
                 let value = trline.cells[1]
                 
                 //transforma os th em inputs
-                console.log(input)
-                input.value = name.textContent
-                name.appendChild(input)
-               
-                console.log(target.parentNode)
-                console.log(name,value)
+                name.textContent ='slaviu'
+                
+                value.textContent = 'eu tentei'
+
                 
                 
             }   
