@@ -1,9 +1,14 @@
 import { Table,components,AdicionalInfo} from "../scripts/modules/CreateElemens/elements.mjs";
+import {  DataBase } from "../scripts/modules/database/db.mjs";
+
 let bud = document.querySelector('.budgets-container')
+
 const table = new Table('table',bud,'nãotem')
 const Tela = new components('section',bud,'card')
 const budgets = ['Gastos Fixos','Investimentos','Metas']
 const comp = new AdicionalInfo('section',document.querySelectorAll('tbody')[0])
+const banco = new DataBase('Teste')
+
 document.querySelectorAll('table')[0].insertAdjacentElement('afterend',comp.CreateComplement(false));
 function cria_sesao(BudgetName){
 
@@ -25,9 +30,25 @@ function Cria_Resumo(x){
     document.querySelectorAll('.card')[1].appendChild(kk)
 
 }
+
 Cria_Resumo(budgets)
 cria_sesao('Gastos Fixos')
 
 cria_sesao('Investimentos')
 
 cria_sesao('Metas')
+
+function cria_database(){
+
+    
+   let dbrequest = banco.CreateDB(1)
+   console.log(dbrequest)
+
+
+   
+
+
+
+}
+
+cria_database()

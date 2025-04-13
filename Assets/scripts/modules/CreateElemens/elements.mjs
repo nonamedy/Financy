@@ -163,6 +163,7 @@ export class Table extends HtmlComponents {
         this.EditTableRow(table,InputNameForEdit,InputValueForEdit);
 
         return table;
+        
 
     };
   
