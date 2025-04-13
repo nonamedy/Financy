@@ -24,7 +24,7 @@ export class InputEvents extends events{
         console.log(this.element)
         this.element.addEventListener('change',(e) => {
 
-            database.OpenTransaction('renda','readwrite',{renda:this.element.value,})
+            database.OpenTransaction('renda','readwrite',{renda:this.element.value,data:database.GetDate()})
 
 
 

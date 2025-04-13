@@ -12,7 +12,7 @@ export class DataBase{
      };
 
      
-    GetDete(){
+    GetDate(){
 
         const date = new Date()
         const month = date.getMonth() + 1
