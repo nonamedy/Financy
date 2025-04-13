@@ -1,3 +1,5 @@
+// Control the creation of HTML ELEMENTS
+
 // superclaas 
 class HtmlComponents {
 
@@ -264,7 +266,7 @@ export class components extends HtmlComponents {
 
     CreateInputsLabel(idName,idValue,classe ='Inputs-Container',FieldsClass ='input-budgets' ){
 
-        const InputsContainer = document.createElement('section');
+        const InputsContainer = document.createElement('form');
         InputsContainer.setAttribute('class',classe);
 
         //input for the name of budget

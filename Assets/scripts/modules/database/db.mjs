@@ -6,7 +6,7 @@ export class DataBase{
 
         this.DBName = DBName;
         this.Version = Version;
-        let sla;
+      
  
         
      };
@@ -53,7 +53,7 @@ export class DataBase{
 
     }
 
-    OpenTransaction(objectstorename='',type='readonly'){
+    OpenTransaction(objectstorename='',type='readonly',data){
 
         return new Promise((resolve) =>{
 
@@ -62,19 +62,17 @@ export class DataBase{
 
                 const transaction = Response.transaction(objectstorename,type);
                 transaction.objectStore(objectstorename);
+                if(type === 'readonly'){
 
-                if(type ==='readonly'){
-
-                    const cursor = transaction.openCursor();
-                    console.log(cursor)
+                  resolve(this.ReadOnly(transaction))
 
                 } else {
 
-                    console.log('sla')
+                    resolve(this.ReadWrite(transaction,data))
 
                         
                 }
-
+              
                 
 
 
@@ -82,6 +80,21 @@ export class DataBase{
 
 
         })
+
+    }
+
+    ReadOnly(request){
+
+        const cursor = transaction.openCursor();
+        console.log(cursor)
+
+        return cursor
+
+    }
+
+    ReadWrite(request,data){
+
+         return request.add(data)
 
     }
 
