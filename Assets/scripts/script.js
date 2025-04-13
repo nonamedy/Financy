@@ -1,6 +1,6 @@
 import { Table,components,AdicionalInfo} from "../scripts/modules/CreateElemens/elements.mjs";
 import {  DataBase } from "../scripts/modules/database/db.mjs";
-import { DataBase} from "../scripts/modules/database/db.mjs";
+
 let bud = document.querySelector('.budgets-container');
 
 const table = new Table('table',bud,'nãotem');
