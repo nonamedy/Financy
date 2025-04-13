@@ -1,6 +1,6 @@
 import { Table,components,AdicionalInfo} from "../scripts/modules/CreateElemens/elements.mjs";
 import {  DataBase } from "../scripts/modules/database/db.mjs";
-
+import { InputEvents } from "../scripts/modules/HtmlEvents/events.mjs";
 let bud = document.querySelector('.budgets-container');
 
 const table = new Table('table',bud,'nãotem');
@@ -8,6 +8,10 @@ const Tela = new components('section',bud,'card');
 const budgets = ['Gastos Fixos','Investimentos','Metas'];
 const comp = new AdicionalInfo('section',document.querySelectorAll('tbody')[0]);
 const banco = new DataBase('Teste')
+
+const renda = document.querySelector('#renda')
+const eventos = new InputEvents(renda)
+eventos.EditValueEvent()
 
 document.querySelectorAll('table')[0].insertAdjacentElement('afterend',comp.CreateComplement(false));
 function cria_sesao(BudgetName){

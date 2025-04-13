@@ -1,4 +1,8 @@
 
+import { DataBase } from "../database/db.mjs";
+
+const database = new DataBase('teste',1)
+
 export class events{
 
     constructor(element){
@@ -17,13 +21,23 @@ export class InputEvents extends events{
 
     EditValueEvent(){
 
-        
-        this.element.addEventListener('focusout',(e) => {
+        console.log(this.element)
+        this.element.addEventListener('change',(e) => {
 
-            this.element.color = 'red';
+            database.OpenTransaction('renda','readwrite',{renda:this.element.value,})
+
 
 
         });
+
+        this.element.addEventListener('focusout',(e) => {
+
+            console.log(e)
+
+
+        });
+
+
 
     };
 

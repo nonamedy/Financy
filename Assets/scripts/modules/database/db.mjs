@@ -11,6 +11,23 @@ export class DataBase{
         
      };
 
+     
+    GetDete(){
+
+        const date = new Date()
+        const month = date.getMonth() + 1
+        const year = date.getFullYear().toString().slice(-2)
+
+        const fmes = month < 10 ? `0${month}` : month;
+
+        const formated_date = `${fmes.toString()}/${year.toString()}`
+
+
+        return formated_date
+
+
+}
+
     CreateDB(version){
 
         if(version){
@@ -57,11 +74,12 @@ export class DataBase{
 
         return new Promise((resolve) =>{
 
+            const dd = this.CreateDB(1)
 
-            this.CreateDB.then((reponse) => {
-
-                const transaction = Response.transaction(objectstorename,type);
-                transaction.objectStore(objectstorename);
+            dd.then((response) => {
+                
+                const transaction = response.transaction(objectstorename,type).objectStore(objectstorename);
+                
                 if(type === 'readonly'){
 
                   resolve(this.ReadOnly(transaction))
