@@ -5,7 +5,7 @@ let bud = document.querySelector('.budgets-container');
 
 const table = new Table('table',bud,'nãotem');
 const Tela = new components('section',bud,'card');
-const budgets = ['Gastos Fixos','Investimentos','Metas'];
+const budgets = ['Gastos Fixos','Investimentos','Metas,','prazeres'];
 const comp = new AdicionalInfo('section',document.querySelectorAll('tbody')[0]);
 const banco = new DataBase('Teste')
 
@@ -35,12 +35,25 @@ function Cria_Resumo(x){
 
 }
 
+function cria_metas(x){
+
+    x = budgets.length
+  
+    let kk = table.CreateTable(x,1,[' ',' '],[budgets])
+  
+    document.querySelectorAll('.card')[2].appendChild(kk)
+
+        
+}
+
 Cria_Resumo(budgets)
 cria_sesao('Gastos Fixos')
 
 cria_sesao('Investimentos')
+cria_metas()
 
 cria_sesao('Metas')
+cria_sesao('Prazeres')
 
 function cria_database(){
 

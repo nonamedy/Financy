@@ -34,12 +34,16 @@ body{
 /*Cards. Cada pequena seção separada*/
 .card{
 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 
     background-color: rgba(77, 74, 74, 0.377);
     border-radius: 5px;
     padding: 8px;
     flex-wrap: wrap;
     max-height: 50vh;
+    
    
   
 
@@ -147,9 +151,36 @@ body{
 
 /* ---------------         ------------ */
 
+/* --------------- Ids --------------- */
+
+#edit-porcent{
+    
+    background-color:#f4a22fd7;
+    color: #483C57;
+
+    font-size:16px;
+
+    padding: 1.5px;
+
+    outline:none;
+    border: none;
+
+    border-radius: 1px ;
+
+}
+
+#edit-porcent:hover{
+
+    cursor: pointer;
+    scale: 1.1;
+        
+}
+
+
+
 tr[lineid]{
 
-    background-color: rgba(255, 217, 0, 0.062);
+    background-color: rgba(231, 45, 185, 0.062);
 
 }
 

@@ -61,9 +61,11 @@ export class InputEvents extends events{
 
     };
 
-    FocusIN(){}; 
-    FocusOut(){}; // uma vez que enter seja pressiionbado ou o inpit perde o foco os valores voltam a ser o que eram
+   eventosParaMetas(){
 
+    
+
+   }
         
 }
 
