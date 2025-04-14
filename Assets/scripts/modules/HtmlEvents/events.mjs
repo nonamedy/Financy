@@ -1,7 +1,7 @@
 
 import { DataBase } from "../database/db.mjs";
 
-const database = new DataBase('teste',1)
+const database = new DataBase('Teste',1)
 
 export class events{
 
@@ -19,7 +19,7 @@ export class events{
 export class InputEvents extends events{
 
 
-    EditValueEvent(){
+    EventosParaARenda(){
 
         console.log(this.element)
         this.element.addEventListener('change',(e) => {
@@ -32,10 +32,30 @@ export class InputEvents extends events{
 
         this.element.addEventListener('focusout',(e) => {
 
-            console.log(e)
+            console.log(e.target)
 
 
         });
+
+         document.addEventListener('DOMContentLoaded',(e)=> {
+
+
+            const  importrendaofdb = database.OpenTransaction('renda','readonly');
+            importrendaofdb.then((response) => {
+;
+
+                this.element.value = Number(response.renda)
+             
+
+
+            })
+        
+            
+
+           
+
+
+        })
 
 
 

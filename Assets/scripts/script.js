@@ -11,9 +11,9 @@ const banco = new DataBase('Teste')
 
 const renda = document.querySelector('#renda')
 const eventos = new InputEvents(renda)
-eventos.EditValueEvent()
+eventos.EventosParaARenda()
 
-document.querySelectorAll('table')[0].insertAdjacentElement('afterend',comp.CreateComplement(false));
+
 function cria_sesao(BudgetName){
 
     let inputName = Tela.CreateInput('text','edite o custo','','Edit-Field-input')
@@ -29,7 +29,7 @@ function cria_sesao(BudgetName){
 function Cria_Resumo(x){
     x = budgets.length
   
-    let kk = table.CreateTable(x,1,['Budget','Valor Gasto','Deve Gastar','Utilizado','Total'],[budgets[1]])
+    let kk = table.CreateTable(x,1,['Budget','Valor Gasto','Deve Gastar','Utilizado','Total'],[budgets])
   
     document.querySelectorAll('.card')[1].appendChild(kk)
 
@@ -56,3 +56,4 @@ function cria_database(){
 }
 
 cria_database()
+document.querySelectorAll('table')[0].insertAdjacentElement('afterend',comp.CreateComplement(false));

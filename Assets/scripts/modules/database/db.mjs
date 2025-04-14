@@ -66,9 +66,9 @@ export class DataBase{
     
             }
     
-        })
+        });
 
-    }
+    };
 
     OpenTransaction(objectstorename='',type='readonly',data){
 
@@ -82,11 +82,11 @@ export class DataBase{
                 
                 if(type === 'readonly'){
 
-                  resolve(this.ReadOnly(transaction))
+                    resolve(this.ReadOnly(transaction));
 
                 } else {
 
-                    resolve(this.ReadWrite(transaction,data))
+                    resolve(this.ReadWrite(transaction,data,'put'));
 
                         
                 }
@@ -94,25 +94,47 @@ export class DataBase{
                 
 
 
-            })
+            });
 
 
-        })
+        });
 
     }
 
     ReadOnly(request){
 
-        const cursor = transaction.openCursor();
-        console.log(cursor)
+        return new Promise((resolve) => {
 
-        return cursor
+            const cursorrequest = request.openCursor();
+      
+            cursorrequest.onsuccess = () => {
+    
+    
+                try {
+                    
+                    const cursor = cursorrequest.result.value
+                    
+                      resolve(cursor)
+    
+                } catch (error) {
+                    
+                    window.alert(error)
+    
+                }
+    
+    
+            }
+
+
+        })
+
+        
 
     }
 
-    ReadWrite(request,data){
+    ReadWrite(request,data={},type='put'){
 
-         return request.add(data)
+         return request[type](data)
 
     }
 

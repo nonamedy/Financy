@@ -120,18 +120,27 @@ export class Table extends HtmlComponents {
         
         let tr;
         let data;
-      
-       
+        console.log(text)
+       //quantidade de linhas
         for(let line=0 ; line < lines; line++){
 
-            tr = this.CreateTR(`${'table'}-${line}`);
-            
-
+            tr = this.CreateTR(`${text}-${line}`);
+           
+      
+            //cria TDS em relaçãoa o tammanho do objeto
             for(let tdline in text){
 
                 if(type === 'td'){
 
-                    data = this.CreateTD(text[tdline]);
+                    if(text.length === 1){
+
+
+                    
+
+                        data = this.CreateTD(text[0][line]);
+                }else{data = this.CreateTD(text[tdline]);}
+
+                   
 
                 } else {
 
