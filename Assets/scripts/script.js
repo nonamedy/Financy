@@ -3,6 +3,19 @@ import {  DataBase } from "../scripts/modules/database/db.mjs";
 import { InputEvents } from "../scripts/modules/HtmlEvents/events.mjs";
 let bud = document.querySelector('.budgets-container');
 
+class CreateBudgets {
+    constructor(parameters) {
+        
+    }
+
+
+    CreateBudget(){
+
+        
+
+    }
+}
+
 const table = new Table('table',bud,'nãotem');
 const Tela = new components('section',bud,'card');
 const budgets = ['Gastos Fixos','Investimentos','Metas,','prazeres'];
