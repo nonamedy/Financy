@@ -319,7 +319,7 @@ export class components extends HtmlComponents {
 export class AdicionalInfo extends HtmlComponents{
 
 
-    CreateComplement(utilizado = true){
+    CreateComplement(utilizado = true,father){
 
         const section = this.CreateElements();
         section.setAttribute('class',this.ElementClass = 'complements-container');
@@ -333,7 +333,7 @@ export class AdicionalInfo extends HtmlComponents{
         section.appendChild(percentual);
 
         this.AddToDOM(section);
-       
+
         return section;
 
 

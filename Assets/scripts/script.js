@@ -6,39 +6,34 @@ let bud = document.querySelector('.budgets-container');
 class CreateBudgets {
     constructor(parameters) {
         
-    }
+    };
 
 
     tableBuilder(){
 
-         this.table = new Table('table',bud,'nãotem')
-         return this
+         this.table = new Table('table',bud,'nãotem');
+         return this;
 
-    }
+    };
 
     CompBuilder(){
 
         this.component = new components('section',bud,'card')
-        return this
+        return this;
 
     }
 
     ExtraBuildr(pai){
 
-        this.extra = new AdicionalInfo('section',bud)
+        this.extra = new AdicionalInfo('section',bud,'')
+        return this;
 
-    }
-}
+    };
+};
 
 
 
-const kkk = new CreateBudgets()
-kkk.CreateBudget()
-kkk.CompBuilder()
-kkk.ExtraBuildr()
-console.log(kkk)
-kkk.table.CreateTable(3,1,['teste','testavel'],['Academia','80'],'slakk','vanguarda');
-console.log(kkk)
+
 
 const table = new Table('table',bud,'nãotem');
 const Tela = new components('section',bud,'card');
@@ -108,3 +103,14 @@ function cria_database(){
 cria_database()
 document.querySelectorAll('table')[0].insertAdjacentElement('afterend',comp.CreateComplement(false));
 
+const kkk = new CreateBudgets();
+kkk.tableBuilder();
+kkk.CompBuilder();
+kkk.ExtraBuildr();
+
+console.log(kkk);
+const inputName = kkk.component.CreateInput('text','edite o custo','','Edit-Field-input')
+const inputValue = kkk.component.CreateInput('number','edite o custo','','Edit-Field-input')
+const tabela = kkk.table.CreateTable(3,1,['teste','testavel','kkk'],['Academia','80'],inputName,inputValue)
+const compo = kkk.component.CreateComponent('slamanokk',tabela)
+console.log(compo)
