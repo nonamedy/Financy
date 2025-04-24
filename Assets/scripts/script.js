@@ -93,15 +93,41 @@ class teste{
 
     CreateGoals(){
 
-        const container = document.querySelectorAll('.card')[2]
+        const container = document.querySelectorAll('.card')[2];
     
         let table =this.tabela.CreateTable(this.fixedbudgets.length,1,[],[this.fixedbudgets] )
-        let editbutton = document.createElement('button')
-        editbutton.setAttribute('id','edit-porcent')
-        editbutton.textContent = 'editar'
+        let editbutton = document.createElement('button');
+        editbutton.setAttribute('id','edit-porcent');
+        editbutton.textContent = 'editar';
+        editbutton.addEventListener('click', (e) =>{
 
-        container.appendChild(table)
-        container.appendChild(editbutton)
+            const dialog = document.querySelector('dialog');
+
+            const formdialog = document.querySelector('#dialog-form')
+
+            this.fixedbudgets.forEach((value) => {
+
+                const label = document.createElement('label');
+                label.setAttribute('for',`${value}-range`);
+                label.textContent = value;
+
+                const input = document.createElement('input');
+                input.setAttribute('type','range');
+
+                formdialog.appendChild(label)
+                formdialog.appendChild(input)
+
+
+            });
+
+            dialog.setAttribute('id','modal')
+            dialog.setAttribute('open','')
+            
+
+        })
+
+        container.appendChild(table);
+        container.appendChild(editbutton);
 
     };
 
