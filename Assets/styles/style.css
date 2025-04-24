@@ -191,8 +191,18 @@ body{
     text-align: center;
     font-size: 22px;
 
+    border: none;
+    border-radius: 2px;
+    outline:none;
+
     background-color: rgb(82, 82, 82);
 
+
+}
+
+#modal::backdrop{
+
+    background-color: rgba(0, 0, 0, 0.034);
 
 }
 

@@ -107,6 +107,7 @@ class teste{
 
             this.fixedbudgets.forEach((value) => {
 
+                
                 const label = document.createElement('label');
                 label.setAttribute('for',`${value}-range`);
                 label.textContent = value;
