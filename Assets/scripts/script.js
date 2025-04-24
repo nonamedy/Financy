@@ -92,9 +92,17 @@ class teste{
     };
 
     CreateGoals(){
-    
 
-        
+        const container = document.querySelectorAll('.card')[2]
+    
+        let table =this.tabela.CreateTable(this.fixedbudgets.length,1,[],[this.fixedbudgets] )
+        let editbutton = document.createElement('button')
+        editbutton.setAttribute('id','edit-porcent')
+        editbutton.textContent = 'editar'
+
+        container.appendChild(table)
+        container.appendChild(editbutton)
+
     };
 
 
@@ -102,5 +110,6 @@ class teste{
 
 const sla = new teste()
 sla.CreateOverview()
+sla.CreateGoals()
 
 console.log(sla)
