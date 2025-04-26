@@ -280,15 +280,16 @@ export class components extends HtmlComponents {
 
         //input for the name of budget
         const InputName = this.CreateInput('text','Nome do custo',idName,FieldsClass)
-
+        InputName.setAttribute('name','nome')
         //input for  the value
         const InputValue = this.CreateInput('number','R$ 0,00',idValue,FieldsClass);
-
+        InputValue.setAttribute('name','valor')
 
         // add-inputs information icon
         const ADDicon = document.createElement('i');
         ADDicon.setAttribute('class','ph-fill ph-plus-circle')
-        ADDicon.setAttribute('Btarget',idName.split()[0])
+        ADDicon.setAttribute('tabindex','0')
+        
         //Add all inputs to your container
         InputsContainer.appendChild(InputName);
         InputsContainer.appendChild(InputValue);
