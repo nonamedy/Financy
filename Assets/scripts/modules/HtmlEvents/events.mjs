@@ -24,7 +24,7 @@ export class InputEvents extends events{
         console.log(this.element)
         this.element.addEventListener('change',(e) => {
 
-            database.OpenTransaction('renda','readwrite',{renda:this.element.value,data:database.GetDate()})
+            database.OpenTransaction('renda','readwrite',{renda:this.element.value,data:database.GetDate()});
 
 
 
@@ -32,7 +32,7 @@ export class InputEvents extends events{
 
         this.element.addEventListener('focusout',(e) => {
 
-            console.log(e.target)
+            console.log(e.target);
 
 
         });
@@ -61,11 +61,38 @@ export class InputEvents extends events{
 
     };
 
-   eventosParaMetas(){
+   EventosParaMetas(){
 
     
 
-   }
+   };
+
+   EventosParaBotoes(elemento){
+
+    
+    // insirir os valores no banco de dados e na tabela
+
+    elemento.addEventListener('click',(e) =>{
+
+        if( e.target.nodeName === 'I'){
+
+            console.log(e.target.parentElement);
+            console.log(e.target.parentElement[0]);
+
+            const nome = e.target.parentElement[0]
+            const valor = e.target.parentElement[1]
+
+            nome.value= 'deu certo kkk'
+            valor.value = '666'
+
+        };
+        
+
+
+    })
+
+
+   };
         
 }
 

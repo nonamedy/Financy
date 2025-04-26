@@ -30,12 +30,7 @@ function cria_sesao(BudgetName){
 
 
 
-cria_sesao('Gastos Fixos')
 
-cria_sesao('Investimentos')
-
-cria_sesao('Metas')
-cria_sesao('Prazeres')
 
 function cria_database(){
 
@@ -83,7 +78,7 @@ class teste{
         let inputName = this.componentes.CreateInput('text','Nome do custo','','Edit-Field-input')
         let inputValue = Tela.CreateInput('number','R$ 0,00','','Edit-Field-input')
     
-        let table1 = table.CreateTable(3,1,['Nome','Valor'],['Academia','80'],inputName,inputValue);
+        let table1 = table.CreateTable(3,1,['Nome','Valor'],[],inputName,inputValue);
         let component  = Tela.CreateComponent(BudgetName,table1)
         const complemento = new AdicionalInfo('section',component,'');
         complemento.CreateComplement(false)
@@ -138,5 +133,14 @@ class teste{
 const sla = new teste()
 sla.CreateOverview()
 sla.CreateGoals()
+
+sla.fixedbudgets.forEach((e,key) => {
+
+    let container = sla.CreateBudgets(e)
+    eventos.EventosParaBotoes(container)
+    
+
+
+})
 
 console.log(sla)

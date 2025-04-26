@@ -88,9 +88,22 @@ body{
 .ph-plus-circle{
 
 
-font-size:30px;
+    font-size:35px;
 
-position: relative;
+    position: relative;
+
+    top:25%;
+
+    color:#f4a22fd7;
+ 
+
+}
+
+.ph-plus-circle:hover{
+
+    color:#cf8926d7;
+    cursor: pointer;
+
 
 }
 
@@ -219,7 +232,7 @@ position: relative;
 
 tr[lineid]{
 
-    background-color: rgba(231, 45, 185, 0.062);
+    background-color: rgba(231, 45, 45, 0);
 
 }
 

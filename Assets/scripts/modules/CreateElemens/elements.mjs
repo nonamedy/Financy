@@ -120,7 +120,7 @@ export class Table extends HtmlComponents {
         
         let tr;
         let data;
-        console.log(text)
+        
        //quantidade de linhas
         for(let line=0 ; line < lines; line++){
 
@@ -185,7 +185,7 @@ export class Table extends HtmlComponents {
 
         table.addEventListener('mousedown',(e) => {
 
-            console.log(e.target)
+           
             let target = e.target
 
             if(target.nodeName == 'TD'){
@@ -288,7 +288,7 @@ export class components extends HtmlComponents {
         // add-inputs information icon
         const ADDicon = document.createElement('i');
         ADDicon.setAttribute('class','ph-fill ph-plus-circle')
-
+        ADDicon.setAttribute('Btarget',idName.split()[0])
         //Add all inputs to your container
         InputsContainer.appendChild(InputName);
         InputsContainer.appendChild(InputValue);
