@@ -67,7 +67,7 @@ export class InputEvents extends events{
 
    };
 
-   EventosParaBotoes(elemento){
+   EventosParaBotoes(elemento,dbrequest){
 
     
     // insirir os valores no banco de dados e na tabela
@@ -86,7 +86,7 @@ export class InputEvents extends events{
 
         
 
-            console.log(form.parentElement.children[1]);
+            
             const tbody = form.parentElement.children[1].lastChild;
 
     
@@ -113,6 +113,10 @@ export class InputEvents extends events{
                 window.alert('algo deue rrado!')
 
             }
+
+
+
+            
 
 
 

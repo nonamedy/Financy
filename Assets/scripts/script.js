@@ -16,17 +16,7 @@ const eventos = new InputEvents(renda)
 eventos.EventosParaARenda()
 
 
-function cria_sesao(BudgetName){
 
-    let inputName = Tela.CreateInput('text','edite o custo','','Edit-Field-input');
-    let inputValue = Tela.CreateInput('number','edite o custo','','Edit-Field-input');
-
-    let table1 = table.CreateTable(3,1,['Nome','Valor'],['Academia','80'],inputName,inputValue);
-    let component  = Tela.CreateComponent(BudgetName,table1);
-    const complemento = new AdicionalInfo('section',component,'');
-    complemento.CreateComplement(true);
-
-}
 
 
 
@@ -45,7 +35,7 @@ function cria_database(){
 
 }
 
-cria_database();
+
 
 
 
@@ -54,12 +44,14 @@ class teste{
 
     constructor(){
 
-        this.database = new DataBase('Teste');
-        this.tabela =  new Table('table',bud,'nãotem');
+        this.database = new DataBase('Teste',1);
+        this.tabela =  new Table('table',bud,'tabela-estilos');
         this.componentes = new components('section',document.querySelector('.budgets-container'),'card');
         this.infoadicional = new AdicionalInfo('section',document.querySelector('.budgets-container'));
 
         this.fixedbudgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
+
+        
     };
 
     CreateOverview(){
@@ -127,14 +119,20 @@ class teste{
 
     };
 
+    TDtest(){
+
+        this.dbrequest = this.database.CreateDB(1)
+        return this
+    };
 
 }
 
 const sla = new teste()
+sla.TDtest()
 sla.CreateOverview()
 sla.CreateGoals()
 
-sla.fixedbudgets.forEach((e,key) => {
+sla.fixedbudgets.forEach((e) => {
 
     let container = sla.CreateBudgets(e)
     eventos.EventosParaBotoes(container)
