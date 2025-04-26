@@ -287,7 +287,7 @@ export class components extends HtmlComponents {
 
         // add-inputs information icon
         const ADDicon = document.createElement('i');
-        ADDicon.classList = '.ph-fill','.ph-plus-circle';
+        ADDicon.setAttribute('class','ph-fill ph-plus-circle')
 
         //Add all inputs to your container
         InputsContainer.appendChild(InputName);

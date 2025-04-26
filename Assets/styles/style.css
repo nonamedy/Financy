@@ -83,6 +83,17 @@ body{
   
   }
 
+/* Botão dos inputs*/
+
+.ph-plus-circle{
+
+
+font-size:30px;
+
+position: relative;
+
+}
+
 /* - Edit Inputs -*/
 
 .Edit-Table-Input{
