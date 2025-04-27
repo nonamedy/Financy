@@ -11,9 +11,6 @@ export class events{
         this.tabela = new Table('table',element,'')
     };
 
-
-
-
 };
 
 export class InputEvents extends events{
@@ -21,7 +18,6 @@ export class InputEvents extends events{
 
     EventosParaARenda(){
 
-        console.log(this.element)
         this.element.addEventListener('change',(e) => {
 
             database.OpenTransaction('renda','readwrite',{renda:this.element.value,data:database.GetDate()});
@@ -130,43 +126,42 @@ export class InputEvents extends events{
 
    };
 
-    EventosCarregarTabelas(dbrequest,budgetlist){
+    EventosCarregarTabelas(dbrequest,bud){
 
-    dbrequest.then(async(resolve) => {
-
-    let transaction = resolve.transaction("budgets"); 
-    let budgets = transaction.objectStore("budgets");
-    let budgetindex = budgets.index("budget_idx");
-
-    for(let bud in budgetlist){
-
-    let request =  budgetindex.getAll(budgetlist[bud]);
+        return new Promise((resolve) =>{
 
 
-    request.onsuccess = () => {
-        console.log(bud)
-        console.log(request.result);
+            dbrequest.then((response) => {
+
+                let transaction = response.transaction("budgets"); 
+                let budgets = transaction.objectStore("budgets");
+                let budgetindex = budgets.index("budget_idx");
+            
+            
+                let request =  budgetindex.getAll(bud);
+            
+            
+                request.onsuccess = () => {
+
+                    if(request.result !== undefined){
+
+                        console.log(bud)
+                        console.log(request.result);
+                        resolve(request.result)
+
+                    } else {window.alert('aabou')}
+                    
+                
+                }
+
+
+            })
+
+        })
+    
     
     }
-
-    console.log(request);
-        
-
-
-    }
-
-
-        
-  
-
     
-
-   
-
-
-    })
-
-   };
         
-}
+} // endclass
 

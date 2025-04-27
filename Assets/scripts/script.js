@@ -65,12 +65,11 @@ class teste{
 
     };
 
-    CreateBudgets(BudgetName){
+    CreateBudgets(BudgetName,tableData){
 
-        let inputName = this.componentes.CreateInput('text','Nome do custo','','Edit-Field-input')
-        let inputValue = Tela.CreateInput('number','R$ 0,00','','Edit-Field-input')
         
-        let table1 = table.CreateTable(3,1,['Nome','Valor'],[],inputName,inputValue);
+        
+        let table1 = table.CreateTable(3,1,['Nome','Valor'],tableData);
         let component  = Tela.CreateComponent(BudgetName,table1)
         const complemento = new AdicionalInfo('section',component,'');
         complemento.CreateComplement(false)
@@ -131,11 +130,21 @@ const sla = new teste()
 const dbrequest = sla.TDtest()
 sla.CreateOverview()
 sla.CreateGoals()
-
+// cria os budgets
 sla.fixedbudgets.forEach((e) => {
 
-    let container = sla.CreateBudgets(e)
-    eventos.EventosParaBotoes(container,dbrequest)
+    let valor = eventos.EventosCarregarTabelas(sla.dbrequest,e)
+
+    valor.then((response) => {
+        
+        console.log('lo respose aqui',response)
+        let container = sla.CreateBudgets(e,response)
+        eventos.EventosParaBotoes(container,dbrequest)
+
+
+    })
+   
+    
     
   
 

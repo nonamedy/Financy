@@ -129,7 +129,7 @@ export class Table extends HtmlComponents {
       
             //cria TDS em relaçãoa o tammanho do objeto
             for(let tdline in text){
-
+                console.log(text[tdline])
                 if(type === 'td'){
 
                     if(text.length === 1){
@@ -138,7 +138,13 @@ export class Table extends HtmlComponents {
                     
 
                         data = this.CreateTD(text[0][line]);
-                }else{data = this.CreateTD(text[tdline]);}
+                }else{
+                    
+                    data = this.CreateTD(text[tdline].nome);
+                
+                
+                
+                }
 
                    
 
@@ -153,15 +159,16 @@ export class Table extends HtmlComponents {
             }
            
 
-         
+            console.log(data)
             element.appendChild(tr);
 
         };
 
 
+
     }
 
-    CreateTable(NumberOfbodyLines =1,NumberofHeadLines = 1,HeadData = [],BodyData = [],InputNameForEdit,InputValueForEdit){
+    CreateTable(NumberOfbodyLines =1,NumberofHeadLines = 1,HeadData = [],BodyData = []){
 
         //Crate the main table
         const table = this.CreateElements();
@@ -171,7 +178,7 @@ export class Table extends HtmlComponents {
 
         this.AddToDOM(table);
         
-        this.EditTableRow(table,InputNameForEdit,InputValueForEdit);
+      
 
         return table;
         
