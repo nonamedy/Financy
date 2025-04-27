@@ -54,9 +54,12 @@ export class DataBase{
                     case 1:
     
                         d.createObjectStore('porcentagens',{keyPath:'data'});
-                        d.createObjectStore('budgets',{keyPath:'data'});
+                        let buds = d.createObjectStore('budgets',{});
                         d.createObjectStore('renda',{keyPath:'data'});
                         d.createObjectStore('months',{keyPath:'data'});
+
+                        let index = buds.createIndex('budget_idx','budget')
+                    
     
                     break
     
@@ -118,23 +121,23 @@ export class DataBase{
     
                 } catch (error) {
                     
-                    window.alert(error)
+                    window.alert(error);
     
-                }
+                };
     
     
-            }
+            };
 
 
         })
 
         
 
-    }
+    };
 
     ReadWrite(request,data={},type='put'){
 
-         return request[type](data)
+         return request[type](data,data.nome);
 
     }
 

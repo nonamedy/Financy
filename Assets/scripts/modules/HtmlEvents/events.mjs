@@ -78,9 +78,9 @@ export class InputEvents extends events{
 
             console.log(e.target.parentElement);
             console.log(e.target.parentElement[0]);
-            const  form = e.target.parentElement
-            const nome =form.elements.nome
-            const valor = form.elements.valor
+            const  form = e.target.parentElement;
+            const nome =form.elements.nome;
+            const valor = form.elements.valor;
 
       
 
@@ -88,8 +88,8 @@ export class InputEvents extends events{
 
             
             const tbody = form.parentElement.children[1].lastChild;
-
-    
+            const budgetname = form.parentElement.children[0].textContent
+            
             if( nome.value !== '' || valor.value !== ''){
 
 
@@ -102,6 +102,8 @@ export class InputEvents extends events{
     
               
                 tbody.appendChild(tr);
+
+                database.OpenTransaction('budgets','readwrite',{budget:budgetname,nome:nome.value,valor:valor.value,data:database.GetDate()})
 
                 nome.value = ''
                 valor.value = ''
@@ -116,8 +118,7 @@ export class InputEvents extends events{
 
 
 
-            
-
+           
 
 
         };
@@ -126,6 +127,44 @@ export class InputEvents extends events{
 
     })
 
+
+   };
+
+    EventosCarregarTabelas(dbrequest,budgetlist){
+
+    dbrequest.then(async(resolve) => {
+
+    let transaction = resolve.transaction("budgets"); 
+    let budgets = transaction.objectStore("budgets");
+    let budgetindex = budgets.index("budget_idx");
+
+    for(let bud in budgetlist){
+
+    let request =  budgetindex.getAll(budgetlist[bud]);
+
+
+    request.onsuccess = () => {
+        console.log(bud)
+        console.log(request.result);
+    
+    }
+
+    console.log(request);
+        
+
+
+    }
+
+
+        
+  
+
+    
+
+   
+
+
+    })
 
    };
         
