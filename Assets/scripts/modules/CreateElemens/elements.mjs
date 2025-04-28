@@ -73,12 +73,14 @@ export class Table extends HtmlComponents {
 
     };
 
-    CreateTbody(TrLines = 1,text = [' body text not defined']){
+    CreateTbody(TrLines = 1,text = [' body text not defined'],bud){
 
         const  body = document.createElement('tbody');
 
-        this.OrganizeDataANDRows('td',body,TrLines,text)
-    
+
+        this.OrganizeDataANDRows('td',body,TrLines,text,bud)
+
+
         return  body
 
 
@@ -103,6 +105,7 @@ export class Table extends HtmlComponents {
 
         const td = document.createElement('td');
         td.textContent = text;
+
         return td;
 
     };
@@ -110,71 +113,94 @@ export class Table extends HtmlComponents {
 
         const th =  document.createElement('th');
         th.textContent = text;
+
         return th;
 
         
     };
 
-    OrganizeDataANDRows(type,element,lines,text){
-
+    OrganizeDataANDRows(type,element,lines,text,bud=false){
+         
         
-        let tr;
-        let data;
-        
-       //quantidade de linhas
-        for(let line=0 ; line < lines; line++){
-
-            tr = this.CreateTR(`${text}-${line}`);
-           
-      
-            //cria TDS em relaçãoa o tammanho do objeto
-            for(let tdline in text){
-                console.log(text[tdline])
-                if(type === 'td'){
-
-                    if(text.length === 1){
+        switch(type){
 
 
-                    
+            case 'td':
 
-                        data = this.CreateTD(text[0][line]);
-                }else{
-                    
-                    data = this.CreateTD(text[tdline].nome);
-                
-                
-                
+            text.forEach((elemento)=> {
+
+                let tr =this.CreateTR('');
+
+
+                if(bud === true){
+
+                    let tdnome = this.CreateTD(elemento.nome)
+                    let tdvalor = this.CreateTD(elemento.valor)
+    
+    
+                    tr.appendChild(tdnome);
+                    tr.appendChild(tdvalor)
+
                 }
 
-                   
+                else{
 
-                } else {
+                    elemento.forEach((e) => {
 
-                    data = this.CreateTH(text[tdline]);
+                    tr = this.CreateTR('')
+                        
+                    let td = this.CreateTD(e)
+                    tr.appendChild(td)
+                    element.appendChild(tr);
+
+                    })
+
 
                 }
+             
+
+                element.appendChild(tr);
+
+
+
+            })
+
+
+            break
+
+            case 'th':
+
+            const tr =this.CreateTR('')
+
+            text.forEach(dadocolletion => {
                 
-                tr.appendChild(data);
+                let th = this.CreateTH(dadocolletion)
 
-            }
+                tr.appendChild(th)
+                
+
+            });
+
            
-
-            console.log(data)
             element.appendChild(tr);
+            break
 
-        };
+        }
+
+           
+
 
 
 
     }
 
-    CreateTable(NumberOfbodyLines =1,NumberofHeadLines = 1,HeadData = [],BodyData = []){
+    CreateTable(NumberOfbodyLines =1,NumberofHeadLines = 1,HeadData = [],BodyData = [],type){
 
         //Crate the main table
         const table = this.CreateElements();
 
         table.appendChild(this.CreateThead(NumberofHeadLines,HeadData));
-        table.appendChild(this.CreateTbody(NumberOfbodyLines,BodyData));
+        table.appendChild(this.CreateTbody(NumberOfbodyLines,BodyData,type));
 
         this.AddToDOM(table);
         
@@ -182,43 +208,10 @@ export class Table extends HtmlComponents {
 
         return table;
         
-
+    
     };
   
-    // Editing the table
-
-    EditTableRow(table,inputName,inputValue){
-
-
-        table.addEventListener('mousedown',(e) => {
-
-           
-            let target = e.target
-
-            if(target.nodeName == 'TD'){
-                
-                //acessa a linha pai e seus filhos
-                let trline = target.parentNode;
-                let name = trline.cells[0];
-                let value = trline.cells[1];
-        
-          
-                
-                //transforma os th em inputs
-       
-                
-            }
-
-            
-        });
-
-
-    };
-
-
-
-
-    
+ 
 
 };
 

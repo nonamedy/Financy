@@ -145,8 +145,8 @@ export class InputEvents extends events{
 
                     if(request.result !== undefined){
 
-                        console.log(bud)
-                        console.log(request.result);
+                      
+                        
                         resolve(request.result)
 
                     } else {window.alert('aabou')}

@@ -65,11 +65,11 @@ class teste{
 
     };
 
-    CreateBudgets(BudgetName,tableData){
+    CreateBudgets(BudgetName,tableData,tr){
 
         
         
-        let table1 = table.CreateTable(3,1,['Nome','Valor'],tableData);
+        let table1 = table.CreateTable(3,1,['Nome','Valor'],tableData,true);
         let component  = Tela.CreateComponent(BudgetName,table1)
         const complemento = new AdicionalInfo('section',component,'');
         complemento.CreateComplement(false)
@@ -136,9 +136,9 @@ sla.fixedbudgets.forEach((e) => {
     let valor = eventos.EventosCarregarTabelas(sla.dbrequest,e)
 
     valor.then((response) => {
+        // response -> array com os objetos [{},{},{}] || []
         
-        console.log('lo respose aqui',response)
-        let container = sla.CreateBudgets(e,response)
+        let container = sla.CreateBudgets(e,response,response)
         eventos.EventosParaBotoes(container,dbrequest)
 
 
