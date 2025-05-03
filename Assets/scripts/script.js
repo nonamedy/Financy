@@ -65,7 +65,7 @@ class teste{
 
     };
 
-    CreateBudgets(BudgetName,tableData,tr){
+    CreateBudgets(BudgetName,tableData,){
 
         
         
@@ -82,41 +82,74 @@ class teste{
         const container = document.querySelectorAll('.card')[2];
     
         let table =this.tabela.CreateTable(this.fixedbudgets.length,1,[],[this.fixedbudgets] )
+
+        let editbutton = this.CreateGoalsModal();
+        eventos.EventosModal(editbutton,this.fixedbudgets,this.dbrequest);
+       
+        
+
+        container.appendChild(table);
+        container.appendChild(editbutton);
+
+
+    };
+
+    CreateGoalsModal(){
+
+        
+        let porcentagens = this.database.OpenTransaction('porcentagens','readonly')
+
+        //Botão para abrir o Modal
         let editbutton = document.createElement('button');
+        
+        //Botão de submit do formulário
+        let submitbutton = document.createElement('button');
+        submitbutton.setAttribute('class','submitbutton')
+        submitbutton.setAttribute('type','submit');
+        submitbutton.textContent = 'Confirmar'
+        
+
         editbutton.setAttribute('id','edit-porcent');
         editbutton.textContent = 'editar';
-        editbutton.addEventListener('click', (e) =>{
+        
+        
 
-            const dialog = document.querySelector('dialog');
+        const formdialog = document.querySelector('#dialog-form')
 
-            const formdialog = document.querySelector('#dialog-form')
-
+            //Cria um input::range para cada budget
             this.fixedbudgets.forEach((value) => {
 
-                
-                const label = document.createElement('label');
+                // Label
+                const label = document.createElement('label');  
                 label.setAttribute('for',`${value}-range`);
+                label.setAttribute('class','labelmodal')
                 label.textContent = value;
 
+                //Input Range
                 const input = document.createElement('input');
                 input.setAttribute('type','range');
+                input.setAttribute('id',`${value}-range`)
+                input.setAttribute('class','inputmodal')
+                input.setAttribute('max','100')
+                porcentagens.then((response)=>{
 
+
+                    input.setAttribute('value',response[value])
+
+                })
+                
+
+                //Adiciona [label/input] como filhos no formulário
                 formdialog.appendChild(label)
                 formdialog.appendChild(input)
 
 
             });
 
-            dialog.setAttribute('id','modal')
-            dialog.setAttribute('open','')
-            
+        formdialog.appendChild(submitbutton)
+        return editbutton
 
-        })
-
-        container.appendChild(table);
-        container.appendChild(editbutton);
-
-    };
+    }
 
     TDtest(){
 

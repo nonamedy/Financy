@@ -59,7 +59,22 @@ export class InputEvents extends events{
 
    EventosParaMetas(){
 
-    
+    // Carregar as porcentagens do banco de dados
+
+    let porcentagens = database.OpenTransaction('porcentagens','readonly')
+ 
+    porcentagens.then((response) =>{
+
+
+        for(let porcent in response){
+
+
+            console.log(porcent)
+
+        }
+
+    })
+
 
    };
 
@@ -78,11 +93,6 @@ export class InputEvents extends events{
             const nome =form.elements.nome;
             const valor = form.elements.valor;
 
-      
-
-        
-
-            
             const tbody = form.parentElement.children[1].lastChild;
             const budgetname = form.parentElement.children[0].textContent
             
@@ -162,6 +172,54 @@ export class InputEvents extends events{
     
     }
     
+
+    EventosModal(element,buds,dbrequest){
+       
+        const dialog = document.querySelector('dialog');
+        const form = document.querySelector('#dialog-form');
+        dialog.setAttribute('id','modal')
+        
+        element.addEventListener('click',()=> {
+
+           
+            dialog.showModal()
+
+        })
+        
+
+        // Evento para a tabela
+
+        form.addEventListener('submit',(e) => {
+
+            let input;
+            let valores = {};
+            valores.data = database.GetDate();
+          
+            console.log(e)
+        
+            
+            buds.forEach(element => {
+                
+                console.log(e.target.elements[`${element}-range`])
+                input = e.target.elements[`${element}-range`]
+                console.log(input.value)
+                valores[element] = input.value;
+                
+
+               
+               console.log(valores)
+
+            });
+
+            database.OpenTransaction('porcentagens','readwrite',valores)
+           
+
+        })
+        
+
+
+    }
+
         
 } // endclass
 
