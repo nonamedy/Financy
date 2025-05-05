@@ -1,6 +1,7 @@
 import { Table,components,AdicionalInfo} from "../scripts/modules/CreateElemens/elements.mjs";
 import {  DataBase } from "../scripts/modules/database/db.mjs";
 import { InputEvents } from "../scripts/modules/HtmlEvents/events.mjs";
+import { MathOperations } from "../scripts/modules/MathOperations/Math.mjs";
 let bud = document.querySelector('.budgets-container');
 
 
@@ -48,7 +49,7 @@ class teste{
         this.tabela =  new Table('table',bud,'tabela-estilos');
         this.componentes = new components('section',document.querySelector('.budgets-container'),'card');
         this.infoadicional = new AdicionalInfo('section',document.querySelector('.budgets-container'));
-
+        this.mathoperations = new  MathOperations();
         this.fixedbudgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
 
         
@@ -59,22 +60,29 @@ class teste{
     const budgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
   
     let tabelaresumo = this.tabela.CreateTable(budgets.length,1,['Budget','Valor Gasto','Deve Gastar','Utilizado','Total'],[budgets])
-    let addinfo = this.infoadicional.CreateComplement(true)
+
+    let totgasto = this.mathoperations.CalcTotalGasto(this.,'overview')
+    let addinfo = this.infoadicional.CreateComplement(true,totgasto)
     document.querySelectorAll('.card')[1].appendChild(tabelaresumo)
     document.querySelectorAll('.card')[1].appendChild(addinfo)
 
     };
 
-    CreateBudgets(BudgetName,tableData,){
+    CreateBudgets(BudgetName,tableData,data = {}){
 
+        let totgasto = this.mathoperations.CalcTotalGasto(tableData,'budget')
         
-        
+
+
         let table1 = table.CreateTable(3,1,['Nome','Valor'],tableData,true);
-        let component  = Tela.CreateComponent(BudgetName,table1)
-        const complemento = new AdicionalInfo('section',component,'');
-        complemento.CreateComplement(false)
 
-        return component
+        let component  = Tela.CreateComponent(BudgetName,table1)
+
+        let addinfo = this.infoadicional.CreateComplement(false,totgasto)
+        
+        component.appendChild(addinfo)
+
+        return component;
     };
 
     CreateGoals(){
@@ -131,6 +139,8 @@ class teste{
                 input.setAttribute('id',`${value}-range`)
                 input.setAttribute('class','inputmodal')
                 input.setAttribute('max','100')
+
+                //seta o valor do input com o banco de dados
                 porcentagens.then((response)=>{
 
 
@@ -166,13 +176,14 @@ sla.CreateGoals()
 // cria os budgets
 sla.fixedbudgets.forEach((e) => {
 
-    let valor = eventos.EventosCarregarTabelas(sla.dbrequest,e)
+    let valor = eventos.EventosCarregarTabelas(sla.dbrequest,e);
 
+    // carrega todos os budgets [nme,valor ] dentro da
     valor.then((response) => {
         // response -> array com os objetos [{},{},{}] || []
         
-        let container = sla.CreateBudgets(e,response,response)
-        eventos.EventosParaBotoes(container,dbrequest)
+        let container = sla.CreateBudgets(e,response);
+        eventos.EventosParaBotoes(container,dbrequest);
 
 
     })
@@ -185,3 +196,4 @@ sla.fixedbudgets.forEach((e) => {
 
 console.log(sla)
 eventos.EventosCarregarTabelas(sla.dbrequest,sla.fixedbudgets)
+

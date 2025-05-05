@@ -96,7 +96,7 @@ export class InputEvents extends events{
             const tbody = form.parentElement.children[1].lastChild;
             const budgetname = form.parentElement.children[0].textContent
             
-            if( nome.value !== '' || valor.value !== ''){
+            if( nome.value !== '' && valor.value !== ''){
 
 
                 const tr = this.tabela.CreateTR()
@@ -179,6 +179,7 @@ export class InputEvents extends events{
         const form = document.querySelector('#dialog-form');
         dialog.setAttribute('id','modal')
         
+        //abre o modal
         element.addEventListener('click',()=> {
 
            
@@ -192,7 +193,10 @@ export class InputEvents extends events{
         form.addEventListener('submit',(e) => {
 
             let input;
+
+            //objeto que irá ser alocado no banco de dados
             let valores = {};
+
             valores.data = database.GetDate();
           
             console.log(e)
@@ -201,6 +205,8 @@ export class InputEvents extends events{
             buds.forEach(element => {
                 
                 console.log(e.target.elements[`${element}-range`])
+
+                //Encontra o input 
                 input = e.target.elements[`${element}-range`]
                 console.log(input.value)
                 valores[element] = input.value;
@@ -212,11 +218,11 @@ export class InputEvents extends events{
             });
 
             database.OpenTransaction('porcentagens','readwrite',valores)
-           
+            this.porcentagens = valores;
 
         })
         
-
+        return this;
 
     }
 

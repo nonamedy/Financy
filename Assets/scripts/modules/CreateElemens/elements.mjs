@@ -320,12 +320,13 @@ export class components extends HtmlComponents {
 export class AdicionalInfo extends HtmlComponents{
 
 
-    CreateComplement(utilizado = true,father){
+    CreateComplement(utilizado = true, totgasto ){
 
+       
         const section = this.CreateElements();
         section.setAttribute('class',this.ElementClass = 'complements-container');
 
-        const Total_Gasto  = this.complement(0,'Total Gasto','red')
+        const Total_Gasto  = this.complement(Number(totgasto),'Total Gasto','red')
         const Deve_Gastar = this.complement(0,'Deve Gastar','green')
         const percentual = this.complement(0,utilizado == true ?'Utilizado' : 'Percentual')
     
