@@ -61,8 +61,13 @@ class teste{
   
     let tabelaresumo = this.tabela.CreateTable(budgets.length,1,['Budget','Valor Gasto','Deve Gastar','Utilizado','Total'],[budgets])
 
-    let totgasto = this.mathoperations.CalcTotalGasto(this.,'overview')
+    let totgasto = this.mathoperations.CalcTotalGasto(this.dbrequest,'overview')
+
+    let sla = this.database.OpenTransaction('budgets','readonly')
     let addinfo = this.infoadicional.CreateComplement(true,totgasto)
+
+
+
     document.querySelectorAll('.card')[1].appendChild(tabelaresumo)
     document.querySelectorAll('.card')[1].appendChild(addinfo)
 

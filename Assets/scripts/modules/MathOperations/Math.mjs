@@ -1,9 +1,11 @@
 
+import { DataBase } from "../database/db.mjs";
+
 export class MathOperations{
 
     constructor(){
 
-       
+       this.database = new DataBase('teste')
 
     }
 
@@ -38,7 +40,7 @@ export class MathOperations{
 
         case 'overview':
 
-            soma = this.budgetcustos
+            array.
             
             break;
     

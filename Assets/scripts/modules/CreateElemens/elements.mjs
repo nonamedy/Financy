@@ -1,5 +1,5 @@
 // Control the creation of HTML ELEMENTS
-
+import {  } from "../";
 // superclaas 
 class HtmlComponents {
 
@@ -320,15 +320,19 @@ export class components extends HtmlComponents {
 export class AdicionalInfo extends HtmlComponents{
 
 
-    CreateComplement(utilizado = true, totgasto ){
+    CreateComplement(utilizado = true, ){
 
        
+        let totgasto_vlr;
+        let devegastar_vlr;
+        let percentual_vlr;
+
         const section = this.CreateElements();
         section.setAttribute('class',this.ElementClass = 'complements-container');
 
-        const Total_Gasto  = this.complement(Number(totgasto),'Total Gasto','red')
-        const Deve_Gastar = this.complement(0,'Deve Gastar','green')
-        const percentual = this.complement(0,utilizado == true ?'Utilizado' : 'Percentual')
+        const Total_Gasto  = this.complement(totgasto_vlr,'Total Gasto','red');
+        const Deve_Gastar = this.complement(devegastar_vlr,'Deve Gastar','green');
+        const percentual = this.complement(percentual_vlr,utilizado == true ?'Utilizado' : 'Percentual')
     
         section.appendChild(Total_Gasto);
         section.appendChild(Deve_Gastar);
