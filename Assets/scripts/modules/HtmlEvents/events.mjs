@@ -18,10 +18,11 @@ export class InputEvents extends events{
 
     EventosParaARenda(){
 
+        console.log('?')
         this.element.addEventListener('change',(e) => {
 
             database.OpenTransaction('renda','readwrite',{renda:this.element.value,data:database.GetDate()});
-
+            console.log('la renda')
 
 
         });
@@ -36,9 +37,10 @@ export class InputEvents extends events{
          document.addEventListener('DOMContentLoaded',(e)=> {
 
 
-            const  importrendaofdb = database.OpenTransaction('renda','readonly');
+            const  importrendaofdb = database.OpenTransaction('renda','readonly','','key');
+
             importrendaofdb.then((response) => {
-;
+
 
                 this.element.value = Number(response.renda)
              
@@ -177,6 +179,7 @@ export class InputEvents extends events{
        
         const dialog = document.querySelector('dialog');
         const form = document.querySelector('#dialog-form');
+
         dialog.setAttribute('id','modal')
         
         element.addEventListener('click',()=> {
@@ -197,7 +200,7 @@ export class InputEvents extends events{
           
             console.log(e)
         
-            
+            //improta o valor do bando e dados para os elementos
             buds.forEach(element => {
                 
                 console.log(e.target.elements[`${element}-range`])

@@ -4,13 +4,6 @@ import { InputEvents } from "../scripts/modules/HtmlEvents/events.mjs";
 let bud = document.querySelector('.budgets-container');
 
 
-
-const table = new Table('table',bud,'nãotem');
-const Tela = new components('section',bud,'card');
-
-const comp = new AdicionalInfo('section',document.querySelectorAll('tbody')[0]);
-const banco = new DataBase('Teste')
-
 const renda = document.querySelector('#renda')
 const eventos = new InputEvents(renda)
 eventos.EventosParaARenda()
@@ -69,8 +62,8 @@ class teste{
 
         
         
-        let table1 = table.CreateTable(3,1,['Nome','Valor'],tableData,true);
-        let component  = Tela.CreateComponent(BudgetName,table1)
+        let table1 = this.tabela.CreateTable(3,1,['Nome','Valor'],tableData,true);
+        let component  = this.componentes.CreateComponent(BudgetName,table1)
         const complemento = new AdicionalInfo('section',component,'');
         complemento.CreateComplement(false)
 
@@ -81,7 +74,7 @@ class teste{
 
         const container = document.querySelectorAll('.card')[2];
     
-        let table =this.tabela.CreateTable(this.fixedbudgets.length,1,[],[this.fixedbudgets] )
+        let table =this.tabela.CreateTable(this.fixedbudgets.length,1,[],[this.fixedbudgets]  )
 
         let editbutton = this.CreateGoalsModal();
         eventos.EventosModal(editbutton,this.fixedbudgets,this.dbrequest);
@@ -185,3 +178,4 @@ sla.fixedbudgets.forEach((e) => {
 
 console.log(sla)
 eventos.EventosCarregarTabelas(sla.dbrequest,sla.fixedbudgets)
+

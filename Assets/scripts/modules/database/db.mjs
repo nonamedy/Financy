@@ -73,7 +73,7 @@ export class DataBase{
 
     };
 
-    OpenTransaction(objectstorename='',type='readonly',data){
+    OpenTransaction(objectstorename='',type='readonly',data,readtype){
 
         return new Promise((resolve) =>{
 
@@ -83,16 +83,25 @@ export class DataBase{
                 
                 const transaction = response.transaction(objectstorename,type).objectStore(objectstorename);
                 
-                if(type === 'readonly'){
 
-                    resolve(this.ReadOnly(transaction));
+                switch (type) {
 
-                } else {
+                    case 'readonly':
 
-                    resolve(this.ReadWrite(transaction,data,'put'));
+                        resolve(this.ReadOnly(transaction,readtype));
 
-                        
+                    break
+
+                  
+              
+                
+                    default:
+
+                        resolve(this.ReadWrite(transaction,data,'put'));    
+
+                    break
                 }
+
               
                 
 
@@ -104,29 +113,64 @@ export class DataBase{
 
     }
 
-    ReadOnly(request){
+    ReadOnly(request,type = 'cursor'){
 
         return new Promise((resolve) => {
 
-            const cursorrequest = request.openCursor();
-      
-            cursorrequest.onsuccess = () => {
-    
-    
-                try {
+            switch(type){
+
+                case 'key':
+                   
+                    let key = request.get(this.GetDate());
+                    console.log(key);
                     
-                    const cursor = cursorrequest.result.value
-                    
-                      resolve(cursor)
-    
-                } catch (error) {
-                    
-                    window.alert(error);
-    
-                };
-    
-    
+                    key.onsuccess = () => {
+
+                        try {
+
+                            resolve(key.result)
+
+                            
+                        } catch (error) {
+                            
+                            console.log('erro')
+
+                        }
+
+
+                    }
+                  
+
+                    break;
+
+                case 'cursor':
+
+                    const cursorrequest = request.openCursor();
+        
+                    cursorrequest.onsuccess = () => {
+            
+            
+                        try {
+                            
+                            const cursor = cursorrequest.result.value
+                            
+                            resolve(cursor)
+            
+                        } catch (error) {
+                            
+                            window.alert(error);
+            
+                        };
+            
+            
+                    };
+
+
+                    break;
             };
+
+
+  
 
 
         })
