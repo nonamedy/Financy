@@ -10,7 +10,12 @@ class MathOperation{
     };
 
 
-    CalcTotalGasto(){};
+    CalcTotalGasto(){
+
+        
+
+
+    };
     CalcPorcentagem(){};
     CalcDeveGastar(){};
     calc(){};

@@ -41,7 +41,7 @@ class teste{
         this.tabela =  new Table('table',bud,'tabela-estilos');
         this.componentes = new components('section',document.querySelector('.budgets-container'),'card');
         this.infoadicional = new AdicionalInfo('section',document.querySelector('.budgets-container'));
-
+        this.eventoss = new InputEvents(renda);
         this.fixedbudgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
 
         

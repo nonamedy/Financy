@@ -89,18 +89,21 @@ export class InputEvents extends events{
 
         if( e.target.nodeName === 'I'){
 
-            console.log(e.target.parentElement);
-            console.log(e.target.parentElement[0]);
+            //Formulário pai dos elementos
             const  form = e.target.parentElement;
+
+            //Campos dos inputs
             const nome =form.elements.nome;
             const valor = form.elements.valor;
 
+            
             const tbody = form.parentElement.children[1].lastChild;
             const budgetname = form.parentElement.children[0].textContent
             
+            //Verifica se nenhum dos campos está vazio.
             if( nome.value !== '' || valor.value !== ''){
 
-
+                //Cria a TableLine  e os Td's para a inserção.
                 const tr = this.tabela.CreateTR()
                 const  dadonome = this.tabela.CreateTD(nome.value)
                 const dadovalor = this.tabela.CreateTD(valor.value)
@@ -111,8 +114,10 @@ export class InputEvents extends events{
               
                 tbody.appendChild(tr);
 
+                //Adiciona ao banco de dados o budget adicinado.
                 database.OpenTransaction('budgets','readwrite',{budget:budgetname,nome:nome.value,valor:valor.value,data:database.GetDate()})
 
+                // reseta os valores dos campos.
                 nome.value = ''
                 valor.value = ''
 
@@ -145,6 +150,7 @@ export class InputEvents extends events{
 
             dbrequest.then((response) => {
 
+                // Cria uma requsição de um index do banco de dados.
                 let transaction = response.transaction("budgets"); 
                 let budgets = transaction.objectStore("budgets");
                 let budgetindex = budgets.index("budget_idx");
@@ -177,6 +183,7 @@ export class InputEvents extends events{
 
     EventosModal(element,buds,dbrequest){
        
+        
         const dialog = document.querySelector('dialog');
         const form = document.querySelector('#dialog-form');
 
@@ -184,7 +191,7 @@ export class InputEvents extends events{
         
         element.addEventListener('click',()=> {
 
-           
+           // Abre o modal
             dialog.showModal()
 
         })
@@ -195,6 +202,7 @@ export class InputEvents extends events{
         form.addEventListener('submit',(e) => {
 
             let input;
+            //Objeto que contêm os budgets com suas devidas porcentagens. [ex:45]
             let valores = {};
             valores.data = database.GetDate();
           
@@ -204,8 +212,10 @@ export class InputEvents extends events{
             buds.forEach(element => {
                 
                 console.log(e.target.elements[`${element}-range`])
+                // Localiza o campo do input
                 input = e.target.elements[`${element}-range`]
-                console.log(input.value)
+               
+                //  Valor do banco de dados é insirido no elemento.
                 valores[element] = input.value;
                 
 
@@ -215,7 +225,9 @@ export class InputEvents extends events{
             });
 
             database.OpenTransaction('porcentagens','readwrite',valores)
-           
+            this.porcentagens = valores;
+
+            console.log(this)
 
         })
         
