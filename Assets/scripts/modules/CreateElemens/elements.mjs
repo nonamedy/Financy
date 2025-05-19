@@ -86,7 +86,7 @@ export class Table extends HtmlComponents {
         const  body = document.createElement('tbody');
 
 
-        this.OrganizeDataANDRows('td',body,TrLines,text,bud)
+        this.OrganizeDataANDRows('td',body,TrLines,text,bud);
 
 
         return  body
@@ -173,6 +173,38 @@ export class Table extends HtmlComponents {
         
                             })
 
+
+                        break
+
+                    case 'overview':
+
+                    elemento.forEach((e) => {
+                        // e = bugname
+                        let tr = this.CreateTR('')
+                            
+                        let budname = this.CreateTD(e);
+                        let totgasto;
+                        let devegastar;
+                        let percentual;
+
+                        this.mathcalc.CalcTotalGasto(e).then((response)=>{
+
+                            totgasto = this.CreateTD(this.FormatToMonetary(response))
+                            tr.appendChild(totgasto)
+                        })
+
+                        this.mathcalc.CalcDeveGastar(e).then((response)=>{
+
+                            devegastar = this.CreateTD(this.FormatToMonetary(response))
+                            tr.appendChild(devegastar)
+                        })
+                     
+
+                        tr.appendChild(budname)
+                  
+                        element.appendChild(tr);
+    
+                        })
 
                         break
                 

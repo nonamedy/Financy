@@ -210,15 +210,17 @@ export class InputEvents extends events{
               
                 // Localiza o campo do input
                 let input = form.elements[`${element}-range`];
+             
 
+                
                 total += Number(input.value);
-               
-                //  Valor do banco de dados é insirido no elemento.
                
                 
 
                
-          
+                //  Valor do banco de dados é insirido no elemento.
+               
+                
 
             });
 
