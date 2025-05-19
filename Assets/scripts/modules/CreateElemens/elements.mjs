@@ -1,5 +1,5 @@
 // Control the creation of HTML ELEMENTS
-
+import { MathOperation } from "../MathOperations/math.mjs";
 // superclaas 
 class HtmlComponents {
 
@@ -8,6 +8,8 @@ class HtmlComponents {
         this.ElementName = ElementName;
         this.ElementClass = ElementClass;
         this.father = father;
+
+        this.mathcalc = new MathOperation()
 
 
     };
@@ -38,7 +40,13 @@ class HtmlComponents {
 
     AddToDOM(element) {
 
-        this.father.appendChild(element)
+        if(this.father !== undefined){
+
+            this.father.appendChild(element)
+
+        }
+
+        
 
     };
 
@@ -56,8 +64,8 @@ export class Table extends HtmlComponents {
     constructor(ElementName,father,ElementClass){
 
 
-        super(ElementName,father,ElementClass);
-
+        super()
+        
     };
 
     //Creating the table
@@ -131,33 +139,60 @@ export class Table extends HtmlComponents {
 
                 let tr =this.CreateTR('');
 
+                switch (bud) {
 
-                if(bud === true){
+                    case true:
+                        
 
-                    let tdnome = this.CreateTD(elemento.nome)
-                    let tdvalor = this.CreateTD(elemento.valor)
+                    let tdnome = this.CreateTD(elemento.nome);
+                    let tdvalor = this.CreateTD(elemento.valor);
     
     
                     tr.appendChild(tdnome);
-                    tr.appendChild(tdvalor)
+                    tr.appendChild(tdvalor);
 
-                }
+                        break;
 
-                else{
+                    case 'metas':
+
+
+                        elemento.forEach((e) => {
+
+                            this.mathcalc.porcentagens.then((response) => {
+
+                                tr = this.CreateTR('')
+                                
+                                let td = this.CreateTD(e)
+                                let tdp = this.CreateTD(`${response[e]}%`)
+                                tr.appendChild(td)
+                                tr.appendChild(tdp)
+                                element.appendChild(tr);
+
+                            })
+                     
+        
+                            })
+
+
+                        break
+                
+                    default:
+
 
                     elemento.forEach((e) => {
 
-                    tr = this.CreateTR('')
-                        
-                    let td = this.CreateTD(e)
-                    tr.appendChild(td)
-                    element.appendChild(tr);
+                        tr = this.CreateTR('')
+                            
+                        let td = this.CreateTD(e)
+                        tr.appendChild(td)
+                        element.appendChild(tr);
+    
+                        })
 
-                    })
-
-
+                        break;
                 }
-             
+
+
 
                 element.appendChild(tr);
 
@@ -319,18 +354,30 @@ export class components extends HtmlComponents {
 
 export class AdicionalInfo extends HtmlComponents{
 
+  
 
-    CreateComplement(utilizado = true,father){
+
+    CreateComplement(utilizado = true,budname){
 
         const section = this.CreateElements();
         section.setAttribute('class',this.ElementClass = 'complements-container');
 
-        const Total_Gasto  = this.complement(0,'Total Gasto','red')
-        const Deve_Gastar = this.complement(0,'Deve Gastar','green')
+        this.mathcalc.CalcTotalGasto(budname).then((response) =>{
+      
+            const Total_Gasto  = this.complement(response,'Total Gasto','red')
+            section.appendChild(Total_Gasto);
+        })
+        
+        this.mathcalc.CalcDeveGastar(budname).then((response)=>{
+
+            const Deve_Gastar = this.complement(response,'Deve Gastar','green')
+            section.appendChild(Deve_Gastar);
+        })
+      
         const percentual = this.complement(0,utilizado == true ?'Utilizado' : 'Percentual')
     
-        section.appendChild(Total_Gasto);
-        section.appendChild(Deve_Gastar);
+        
+    
         section.appendChild(percentual);
 
         this.AddToDOM(section);

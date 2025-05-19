@@ -158,8 +158,8 @@ export class DataBase{
             
                         } catch (error) {
                             
-                            window.alert(error);
-            
+                            window.alert('um erro ocorreu',error);
+                            
                         };
             
             
@@ -184,5 +184,43 @@ export class DataBase{
          return request[type](data,data.nome);
 
     }
+
+    Index(budname){
+
+        return new Promise((resolve) =>{
+
+            let dbresquest = this.CreateDB()
+
+            dbresquest.then((response) => {
+
+                // Cria uma requsição de um index do banco de dados.
+                let transaction = response.transaction("budgets"); 
+                let budgets = transaction.objectStore("budgets");
+                let budgetindex = budgets.index("budget_idx");
+            
+            
+                let request =  budgetindex.getAll(budname);
+            
+            
+                request.onsuccess = () => {
+
+                    if(request.result !== undefined){
+
+                      
+                        
+                        resolve(request.result)
+
+                    } else {window.alert('aabou')}
+                    
+                
+                }
+
+
+            })
+
+        })
+     
+
+    };
 
 };

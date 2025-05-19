@@ -1,6 +1,7 @@
 import { Table,components,AdicionalInfo} from "../scripts/modules/CreateElemens/elements.mjs";
 import {  DataBase } from "../scripts/modules/database/db.mjs";
 import { InputEvents } from "../scripts/modules/HtmlEvents/events.mjs";
+import {  MathOperation } from "../scripts/modules/MathOperations/math.mjs";
 let bud = document.querySelector('.budgets-container');
 
 
@@ -42,6 +43,7 @@ class teste{
         this.componentes = new components('section',document.querySelector('.budgets-container'),'card');
         this.infoadicional = new AdicionalInfo('section',document.querySelector('.budgets-container'));
         this.eventoss = new InputEvents(renda);
+        this.MathCalcs = new MathOperation()
         this.fixedbudgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
 
         
@@ -58,14 +60,17 @@ class teste{
 
     };
 
-    CreateBudgets(BudgetName,tableData,){
+    CreateBudgets(BudgetName,tableData){
 
         
         
         let table1 = this.tabela.CreateTable(3,1,['Nome','Valor'],tableData,true);
-        let component  = this.componentes.CreateComponent(BudgetName,table1)
-        const complemento = new AdicionalInfo('section',component,'');
-        complemento.CreateComplement(false)
+        let component  = this.componentes.CreateComponent(BudgetName,table1);
+        let addinfo = this.infoadicional.CreateComplement(false,BudgetName)
+
+        component.appendChild(addinfo)
+    
+        
 
         return component
     };
@@ -74,7 +79,7 @@ class teste{
 
         const container = document.querySelectorAll('.card')[2];
     
-        let table =this.tabela.CreateTable(this.fixedbudgets.length,1,[],[this.fixedbudgets]  )
+        let table =this.tabela.CreateTable(this.fixedbudgets.length,1,[],[this.fixedbudgets],'metas'  )
 
         let editbutton = this.CreateGoalsModal();
         eventos.EventosModal(editbutton,this.fixedbudgets,this.dbrequest);
@@ -164,7 +169,7 @@ sla.fixedbudgets.forEach((e) => {
     valor.then((response) => {
         // response -> array com os objetos [{},{},{}] || []
         
-        let container = sla.CreateBudgets(e,response,response)
+        let container = sla.CreateBudgets(e,response)
         eventos.EventosParaBotoes(container,dbrequest)
 
 
