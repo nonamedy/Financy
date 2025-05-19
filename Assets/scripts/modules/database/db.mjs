@@ -44,7 +44,7 @@ export class DataBase{
             data.onerror = () => reject(data.error);
     
             data.onupgradeneeded = (event) => {
-                console.log(event);
+                
                 const d = data.result;
     
     
@@ -122,7 +122,7 @@ export class DataBase{
                 case 'key':
                    
                     let key = request.get(this.GetDate());
-                    console.log(key);
+                    
                     
                     key.onsuccess = () => {
 

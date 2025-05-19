@@ -22,14 +22,14 @@ export class InputEvents extends events{
         this.element.addEventListener('change',(e) => {
 
             database.OpenTransaction('renda','readwrite',{renda:this.element.value,data:database.GetDate()});
-            console.log('la renda')
+   
 
 
         });
 
         this.element.addEventListener('focusout',(e) => {
 
-            console.log(e.target);
+      
 
 
         });
@@ -196,6 +196,37 @@ export class InputEvents extends events{
 
         })
         
+        form.addEventListener('change',(e) => {
+            let total= 0;
+            // alterar a capacidade maxima dos inputs, na soma de todos,les não
+            //devem ultrapassar 100%
+
+            // na alteração destes valores o total deve ser mudado
+            let tot = document.querySelector('#totporcents')
+        
+           
+            buds.forEach(element => {
+                
+              
+                // Localiza o campo do input
+                let input = form.elements[`${element}-range`];
+
+                total += Number(input.value);
+               
+                //  Valor do banco de dados é insirido no elemento.
+               
+                
+
+               
+          
+
+            });
+
+            tot.textContent =`Total:${total}%`
+
+            console.log(e)
+
+        })
 
         // Evento para a tabela
 
@@ -206,7 +237,7 @@ export class InputEvents extends events{
             let valores = {};
             valores.data = database.GetDate();
           
-            console.log(e)
+            
         
             //improta o valor do bando e dados para os elementos
             buds.forEach(element => {
@@ -220,14 +251,14 @@ export class InputEvents extends events{
                 
 
                
-               console.log(valores)
+          
 
             });
 
             database.OpenTransaction('porcentagens','readwrite',valores)
             this.porcentagens = valores;
 
-            console.log(this)
+   
 
         })
         

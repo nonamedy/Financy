@@ -58,12 +58,12 @@ export class MathOperation{
             //respons - objeto com as porentagens e a data
             
             porcentagem = Number(response[budname])
-            console.log(porcentagem,budname)
+         
 
         });
 
         let valor = ( renda * porcentagem) /100;
-        console.table({budname,valor});
+
         return  valor;
 
     };

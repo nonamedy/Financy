@@ -94,7 +94,8 @@ class teste{
 
     CreateGoalsModal(){
 
-        
+        let total = 0;
+
         let porcentagens = this.database.OpenTransaction('porcentagens','readonly')
 
         //Botão para abrir o Modal
@@ -114,6 +115,12 @@ class teste{
 
         const formdialog = document.querySelector('#dialog-form')
 
+        const totporcent = document.createElement('p')
+        totporcent.setAttribute('id','totporcents')
+      
+        formdialog.appendChild(totporcent)
+        
+        
             //Cria um input::range para cada budget
             this.fixedbudgets.forEach((value) => {
 
@@ -125,18 +132,24 @@ class teste{
 
                 //Input Range
                 const input = document.createElement('input');
+
                 input.setAttribute('type','range');
-                input.setAttribute('id',`${value}-range`)
-                input.setAttribute('class','inputmodal')
-                input.setAttribute('max','100')
+                input.setAttribute('id',`${value}-range`);
+                input.setAttribute('class','inputmodal');
+                input.setAttribute('max','100');
+
                 porcentagens.then((response)=>{
 
+                    
+                    input.setAttribute('value',response[value]);
+                    total += Number(response[value]);
+                    
+                    
 
-                    input.setAttribute('value',response[value])
-
+                    totporcent.textContent = `total:${total}`
                 })
                 
-
+                
                 //Adiciona [label/input] como filhos no formulário
                 formdialog.appendChild(label)
                 formdialog.appendChild(input)
