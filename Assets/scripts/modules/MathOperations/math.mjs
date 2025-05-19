@@ -8,7 +8,7 @@ export class MathOperation{
         this.db = new DataBase('Teste')
         this.renda = this.db.OpenTransaction('renda','readonly','','key');
         this.porcentagens = this.db.OpenTransaction('porcentagens','readonly')
-
+        
     };
 
 
@@ -23,19 +23,20 @@ export class MathOperation{
 
             response.forEach((obj) =>{
        
-           
+                
 
                 soma +=   Number(obj.valor);
 
                 
-                
+               
 
             })
 
         })
         
-
-        return soma;
+     
+      
+        return  soma;
 
 
     };
@@ -74,14 +75,24 @@ export class MathOperation{
         //devo primeiro calcular a procentagem do bud em relação ao salário
         //depois subtrair isso do valor total somado
 
-        let porcentthis = await this.CalcPorcentagem(budname)
-        let total = await this.CalcTotalGasto(budname)
+        let porcentthis = await this.CalcPorcentagem(budname);
+        let total = await this.CalcTotalGasto(budname);
 
-        let devegastar = porcentthis - total
+        let devegastar = porcentthis - total;
 
-        return devegastar
+        return devegastar;
 
     };
-    calc(){};
+    async CalPorcentual(budname){
+
+        let percentual;
+
+        let total = await this.CalcPorcentagem(budname);
+        let totalgasto = await this.CalcTotalGasto(budname);
+        percentual = (totalgasto/total) * 100
+
+        return percentual;
+
+    };
 
 };

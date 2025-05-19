@@ -198,6 +198,13 @@ export class Table extends HtmlComponents {
                             devegastar = this.CreateTD(this.FormatToMonetary(response))
                             tr.appendChild(devegastar)
                         })
+
+
+                        this.mathcalc.CalcPorcentual(e).then((response)=>{
+
+                            percentual = this.CreateTD(`${response}%`);
+                            tr.appendChild(percentual);
+                        })
                      
 
                         tr.appendChild(budname)
