@@ -129,7 +129,7 @@ export class Table extends HtmlComponents {
 
     OrganizeDataANDRows(type,element,lines,text,bud=false){
          
-        
+
         switch(type){
 
 
@@ -139,6 +139,7 @@ export class Table extends HtmlComponents {
 
                 let tr =this.CreateTR('');
 
+                //organiza de acordo com o tipo específico de tabela
                 switch (bud) {
 
                     case true:
@@ -200,7 +201,7 @@ export class Table extends HtmlComponents {
                         })
 
 
-                        this.mathcalc.CalcPorcentual(e).then((response)=>{
+                        this.mathcalc.CalPorcentual(e).then((response)=>{
 
                             percentual = this.CreateTD(`${response}%`);
                             tr.appendChild(percentual);
@@ -403,21 +404,23 @@ export class AdicionalInfo extends HtmlComponents{
 
         this.mathcalc.CalcTotalGasto(budname).then((response) =>{
       
-            const Total_Gasto  = this.complement(response,'Total Gasto','red')
+            const Total_Gasto  = this.complement(response,'Total Gasto','red',true)
             section.appendChild(Total_Gasto);
         })
         
         this.mathcalc.CalcDeveGastar(budname).then((response)=>{
 
-            const Deve_Gastar = this.complement(response,'Deve Gastar','green')
+            const Deve_Gastar = this.complement(response,'Deve Gastar','green','',true)
             section.appendChild(Deve_Gastar);
         })
+
+        this.mathcalc.CalPorcentual(budname).then((response) =>{
+
+            const percentual = this.complement(response,utilizado == true ?'Utilizado' : 'Percentual','',false)
+            section.appendChild(percentual);
+        })
       
-        const percentual = this.complement(0,utilizado == true ?'Utilizado' : 'Percentual')
-    
-        
-    
-        section.appendChild(percentual);
+     
 
         this.AddToDOM(section);
 
@@ -426,12 +429,22 @@ export class AdicionalInfo extends HtmlComponents{
 
     }
 
-    complement(data = 0,text,id){
+    complement(data = 0,text,id,monetary){
 
         const container = document.createElement('div');
 
         const PrincipalValue = document.createElement('p');
-        PrincipalValue.textContent = this.FormatToMonetary(data);
+
+        if(monetary ===true){
+
+            PrincipalValue.textContent = this.FormatToMonetary(data);
+
+        } else{
+
+            PrincipalValue.textContent = `${data}%`
+
+        }
+        
         PrincipalValue.setAttribute('class','data-complement');
     
         if( PrincipalValue !== undefined){
