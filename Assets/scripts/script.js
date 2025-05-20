@@ -54,7 +54,7 @@ class teste{
     const budgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
   
     let tabelaresumo = this.tabela.CreateTable(budgets.length,1,['Budget','Valor Gasto','Deve Gastar','Utilizado','Total'],[budgets],'overview')
-    let addinfo = this.infoadicional.CreateComplement(true)
+    let addinfo = this.infoadicional.CreateComplement(true,'overview')
     document.querySelectorAll('.card')[1].appendChild(tabelaresumo)
     document.querySelectorAll('.card')[1].appendChild(addinfo)
 

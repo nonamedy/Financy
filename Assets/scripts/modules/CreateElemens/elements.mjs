@@ -400,17 +400,20 @@ export class AdicionalInfo extends HtmlComponents{
     CreateComplement(utilizado = true,budname){
 
         const section = this.CreateElements();
+
         section.setAttribute('class',this.ElementClass = 'complements-container');
+        
 
         this.mathcalc.CalcTotalGasto(budname).then((response) =>{
-      
+            console.log(budname)
             const Total_Gasto  = this.complement(response,'Total Gasto','red',true)
             section.appendChild(Total_Gasto);
         })
         
         this.mathcalc.CalcDeveGastar(budname).then((response)=>{
 
-            const Deve_Gastar = this.complement(response,'Deve Gastar','green','',true)
+
+            const Deve_Gastar = this.complement(response,'Deve Gastar','green',true)
             section.appendChild(Deve_Gastar);
         })
 

@@ -75,10 +75,24 @@ export class MathOperation{
         //devo primeiro calcular a procentagem do bud em relação ao salário
         //depois subtrair isso do valor total somado
 
-        let porcentthis = await this.CalcPorcentagem(budname);
-        let total = await this.CalcTotalGasto(budname);
+        let devegastar;
+        if(budname === 'overview'){
 
-        let devegastar = porcentthis - total;
+        devegastar =  1;
+
+
+        } else{
+
+            let porcentthis = await this.CalcPorcentagem(budname);
+            let total = await this.CalcTotalGasto(budname);
+
+            devegastar = porcentthis - total;
+
+
+        }
+      
+
+      
 
         return devegastar;
 
@@ -91,7 +105,7 @@ export class MathOperation{
         let totalgasto = await this.CalcTotalGasto(budname);
         percentual = (totalgasto/total) * 100
 
-        return percentual;
+        return Math.ceil(percentual);
 
     };
 
