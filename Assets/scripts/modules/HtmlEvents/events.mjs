@@ -101,7 +101,7 @@ export class InputEvents extends events{
             const budgetname = form.parentElement.children[0].textContent
             
             //Verifica se nenhum dos campos está vazio.
-            if( nome.value !== '' || valor.value !== ''){
+            if( nome.value !== '' && valor.value !== ''){
 
                 //Cria a TableLine  e os Td's para a inserção.
                 const tr = this.tabela.CreateTR()
@@ -125,7 +125,7 @@ export class InputEvents extends events{
             } else{
 
 
-                window.alert('algo deue rrado!')
+                window.alert('Os dois campos devem ser prenchidos.')
 
             }
 
