@@ -78,7 +78,7 @@ export class MathOperation{
         let devegastar;
         if(budname === 'overview'){
 
-        devegastar =  1;
+            devegastar =  this.renda;
 
 
         } else{
@@ -99,13 +99,18 @@ export class MathOperation{
     };
     async CalPorcentual(budname){
 
-        let percentual;
+            let percentual;
 
-        let total = await this.CalcPorcentagem(budname);
-        let totalgasto = await this.CalcTotalGasto(budname);
-        percentual = (totalgasto/total) * 100
+   
+            let total = await this.CalcPorcentagem(budname);
+            let totalgasto = await this.CalcTotalGasto(budname);
+            percentual = (totalgasto/total) * 100
+    
+            return Math.ceil(percentual);
 
-        return Math.ceil(percentual);
+
+
+  
 
     };
 

@@ -397,32 +397,93 @@ export class AdicionalInfo extends HtmlComponents{
   
 
 
-    CreateComplement(utilizado = true,budname){
+    CreateComplement(utilizado = true,budname,overview){
 
         const section = this.CreateElements();
 
         section.setAttribute('class',this.ElementClass = 'complements-container');
         
+        // warning: death scope
+        if(overview ){
 
-        this.mathcalc.CalcTotalGasto(budname).then((response) =>{
-            console.log(budname)
-            const Total_Gasto  = this.complement(response,'Total Gasto','red',true)
-            section.appendChild(Total_Gasto);
-        })
+            let total = 0;
+            
+   
+            
+            overview.forEach((buds,index,array)=>{
+
+
+ 
+                 this.mathcalc.CalcTotalGasto(buds).then((response) =>{
+                  
+               
+                    total += response;
+                   
+                    if(index +1 === array.length){
+
+                        const Total_Gasto  = this.complement(total,'Total Gasto','red',true);
+                        section.appendChild(Total_Gasto);
+
+
+                        this.mathcalc.CalcDeveGastar('overview').then((response) =>{
+
+                            let valor = response.renda - total;
+                            const Deve_Gastar = this.complement(valor,'Deve Gastar','green',true);
+                            
+                            section.appendChild(Deve_Gastar);
+
+
+                        });
+
+                        this.mathcalc.renda.then((renda) =>{
+
+                            let percent = Math.ceil((total / renda.renda) * 100);
+                            const percentual = this.complement(percent,utilizado == true ?'Utilizado' : 'Percentual','',false)
+                            section.appendChild(percentual);
+
+
+                        })
+                    }
+                    
+                })
+
+    
+
+                
+
+            })
+
+           
         
-        this.mathcalc.CalcDeveGastar(budname).then((response)=>{
+            
+     
+          
+
+        } else{
+
+            this.mathcalc.CalcTotalGasto(budname).then((response) =>{
+        
+                const Total_Gasto  = this.complement(response,'Total Gasto','red',true)
+                section.appendChild(Total_Gasto);
+            })
+            
+            this.mathcalc.CalcDeveGastar(budname).then((response)=>{
+    
+    
+                const Deve_Gastar = this.complement(response,'Deve Gastar','green',true)
+                section.appendChild(Deve_Gastar);
+            })
+    
+            this.mathcalc.CalPorcentual(budname).then((response) =>{
+    
+                const percentual = this.complement(response,utilizado == true ?'Utilizado' : 'Percentual','',false)
+                section.appendChild(percentual);
+            })
+          
 
 
-            const Deve_Gastar = this.complement(response,'Deve Gastar','green',true)
-            section.appendChild(Deve_Gastar);
-        })
+        }
 
-        this.mathcalc.CalPorcentual(budname).then((response) =>{
-
-            const percentual = this.complement(response,utilizado == true ?'Utilizado' : 'Percentual','',false)
-            section.appendChild(percentual);
-        })
-      
      
 
         this.AddToDOM(section);
