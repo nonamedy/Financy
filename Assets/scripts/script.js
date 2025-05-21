@@ -5,9 +5,9 @@ import {  MathOperation } from "../scripts/modules/MathOperations/math.mjs";
 let bud = document.querySelector('.budgets-container');
 
 
-const renda = document.querySelector('#renda')
-const eventos = new InputEvents(renda)
-eventos.EventosParaARenda()
+const renda = document.querySelector('#renda');
+const eventos = new InputEvents(renda);
+eventos.EventosParaARenda();
 
 
 
@@ -19,15 +19,15 @@ eventos.EventosParaARenda()
 function cria_database(){
 
     
-   let dbrequest = banco.CreateDB(1)
-   console.log(dbrequest)
+   let dbrequest = banco.CreateDB(1);
+   console.log(dbrequest);
 
 
    
 
 
 
-}
+};
 
 
 
@@ -43,7 +43,7 @@ class teste{
         this.componentes = new components('section',document.querySelector('.budgets-container'),'card');
         this.infoadicional = new AdicionalInfo('section',document.querySelector('.budgets-container'));
         this.eventoss = new InputEvents(renda);
-        this.MathCalcs = new MathOperation()
+        this.MathCalcs = new MathOperation();
         this.fixedbudgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
 
         
@@ -52,11 +52,11 @@ class teste{
     CreateOverview(){
 
     const budgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
-  
+    console.log(this.tabela);
     let tabelaresumo = this.tabela.CreateTable(budgets.length,1,['Budget','Valor Gasto','Deve Gastar','Utilizado','Total'],[budgets],'overview')
-    let addinfo = this.infoadicional.CreateComplement(true,'overview',this.fixedbudgets)
-    document.querySelectorAll('.card')[1].appendChild(tabelaresumo)
-    document.querySelectorAll('.card')[1].appendChild(addinfo)
+    let addinfo = this.infoadicional.CreateComplement(true,'overview',this.fixedbudgets);
+    document.querySelectorAll('.card')[1].appendChild(tabelaresumo);
+    document.querySelectorAll('.card')[1].appendChild(addinfo);
 
     };
 
@@ -65,10 +65,11 @@ class teste{
         
         
         let table1 = this.tabela.CreateTable(3,1,['Nome','Valor'],tableData,true);
+        console.log(table1)
         let component  = this.componentes.CreateComponent(BudgetName,table1);
-        let addinfo = this.infoadicional.CreateComplement(false,BudgetName)
+        let addinfo = this.infoadicional.CreateComplement(false,BudgetName);
 
-        component.appendChild(addinfo)
+        component.appendChild(addinfo);
     
         
 

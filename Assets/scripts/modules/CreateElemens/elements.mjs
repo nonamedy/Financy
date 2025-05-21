@@ -64,7 +64,7 @@ export class Table extends HtmlComponents {
     constructor(ElementName,father,ElementClass){
 
 
-        super()
+        super(ElementName,father,ElementClass)
         
     };
 
@@ -272,8 +272,9 @@ export class Table extends HtmlComponents {
     CreateTable(NumberOfbodyLines =1,NumberofHeadLines = 1,HeadData = [],BodyData = [],type){
 
         //Crate the main table
+        console.log('the table apritbutes',this)
         const table = this.CreateElements();
-
+        console.log(table)
         table.appendChild(this.CreateThead(NumberofHeadLines,HeadData));
         table.appendChild(this.CreateTbody(NumberOfbodyLines,BodyData,type));
 
