@@ -52,7 +52,7 @@ class teste{
     CreateOverview(){
 
     const budgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
-    console.log(this.tabela);
+  
     let tabelaresumo = this.tabela.CreateTable(budgets.length,1,['Budget','Valor Gasto','Deve Gastar','Utilizado','Total'],[budgets],'overview')
     let addinfo = this.infoadicional.CreateComplement(true,'overview',this.fixedbudgets);
     document.querySelectorAll('.card')[1].appendChild(tabelaresumo);
