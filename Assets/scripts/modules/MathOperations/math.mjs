@@ -7,7 +7,28 @@ export class MathOperation{
 
         this.db = new DataBase('Teste')
         this.renda = this.db.OpenTransaction('renda','readonly','','key');
+
+        this.renda.then((rendaa) =>{
+
+            if(rendaa === undefined){
+
+
+                this.renda = 0;
+
+            }
+
+        })
         this.porcentagens = this.db.OpenTransaction('porcentagens','readonly')
+
+        this.porcentagens.then((response) =>{
+            console.log(response)
+            if(response === undefined){
+
+                this.porcentagens = 0;
+
+            }
+
+        })
         
     };
 
@@ -16,6 +37,7 @@ export class MathOperation{
 
         //recebe um objecto e opera sorbe ele.
         let soma = 0;
+      
 
         await this.db.Index(budname).then((response) =>{
 
@@ -47,25 +69,37 @@ export class MathOperation{
 
         let porcentagem;
         let renda;
+        let valor =0;
         
         await this.renda.then((response) => {
 
           renda = Number(response.renda);
+
+
         
 
         });
 
         await this.porcentagens.then((response) =>{
             //respons - objeto com as porentagens e a data
-            
-            porcentagem = Number(response[budname])
+            if(response !== 0 || response === undefined){
+
+                porcentagem = Number(response[budname])
+
+            } else {porcentagem = 0}
+          
          
 
         });
 
-        let valor = ( renda * porcentagem) /100;
+        if(porcentagem !== 0){
 
-        return  valor;
+            valor = ( renda * porcentagem) /100;
+
+        }
+       
+            return valor;
+       
 
     };
 
@@ -83,10 +117,17 @@ export class MathOperation{
 
         } else{
 
+
+
             let porcentthis = await this.CalcPorcentagem(budname);
             let total = await this.CalcTotalGasto(budname);
 
-            devegastar = porcentthis - total;
+            if(porcentthis === 0 ){
+
+                devegastar = 0;
+
+            } else { devegastar = porcentthis - total;}
+          
 
 
         }
@@ -104,7 +145,11 @@ export class MathOperation{
    
             let total = await this.CalcPorcentagem(budname);
             let totalgasto = await this.CalcTotalGasto(budname);
-            percentual = (totalgasto/total) * 100
+
+            if(total === 0 || totalgasto === 0){
+                percentual = 0;
+
+            } else { percentual = (totalgasto/total) * 100 }
     
             return Math.ceil(percentual);
 

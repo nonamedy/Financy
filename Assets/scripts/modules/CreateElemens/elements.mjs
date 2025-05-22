@@ -164,9 +164,21 @@ export class Table extends HtmlComponents {
                                 tr = this.CreateTR('')
                                 
                                 let td = this.CreateTD(e)
-                                let tdp = this.CreateTD(`${response[e]}%`)
-                                tr.appendChild(td)
-                                tr.appendChild(tdp)
+                                let tdp;
+                                if(response === 0){
+
+                                    tdp = this.CreateTD('0%')
+
+                                }else{
+
+                                    tdp =  this.CreateTD(`${response[e]}%`)
+
+                                }
+                                
+
+                                tr.appendChild(td);
+                                tr.appendChild(tdp);
+
                                 element.appendChild(tr);
 
                             })
@@ -274,7 +286,7 @@ export class Table extends HtmlComponents {
         //Crate the main table
 
         const table = this.CreateElements();
-        table.setAttribute('class',this.ElementClass);  
+        
         table.appendChild(this.CreateThead(NumberofHeadLines,HeadData));
         table.appendChild(this.CreateTbody(NumberOfbodyLines,BodyData,type));
 

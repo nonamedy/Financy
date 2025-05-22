@@ -158,7 +158,7 @@ export class DataBase{
             
                         } catch (error) {
                             
-                            window.alert('um erro ocorreu',error);
+                            resolve(0)
                             
                         };
             
