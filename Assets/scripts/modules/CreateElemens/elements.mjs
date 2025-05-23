@@ -127,7 +127,7 @@ export class Table extends HtmlComponents {
         
     };
 
-    OrganizeDataANDRows(type,element,lines,text,bud=false){
+     OrganizeDataANDRows(type,element,lines,text,bud=false){
          
 
         switch(type){
@@ -146,7 +146,7 @@ export class Table extends HtmlComponents {
                         
 
                     let tdnome = this.CreateTD(elemento.nome);
-                    let tdvalor = this.CreateTD(elemento.valor);
+                    let tdvalor = this.CreateTD(this.FormatToMonetary(Number(elemento.valor)));
     
     
                     tr.appendChild(tdnome);
@@ -157,7 +157,7 @@ export class Table extends HtmlComponents {
                     case 'metas':
 
 
-                        elemento.forEach((e) => {
+                         elemento.forEach((e) => {
 
                             this.mathcalc.porcentagens.then((response) => {
 
@@ -191,36 +191,40 @@ export class Table extends HtmlComponents {
 
                     case 'overview':
 
-                    elemento.forEach((e) => {
+                    elemento.forEach(async(e) => {
                         // e = bugname
                         let tr = this.CreateTR('')
                             
                         let budname = this.CreateTD(e);
+
                         let totgasto;
                         let devegastar;
                         let percentual;
+                        let totalpercentual=   this.CreateTD('?');
 
-                        this.mathcalc.CalcTotalGasto(e).then((response)=>{
+                        tr.appendChild(budname)
+                       
+                        await this.mathcalc.CalcTotalGasto(e).then((response)=>{
 
                             totgasto = this.CreateTD(this.FormatToMonetary(response))
                             tr.appendChild(totgasto)
                         })
 
-                        this.mathcalc.CalcDeveGastar(e).then((response)=>{
+                        await this.mathcalc.CalcDeveGastar(e).then((response)=>{
 
                             devegastar = this.CreateTD(this.FormatToMonetary(response))
                             tr.appendChild(devegastar)
                         })
 
 
-                        this.mathcalc.CalPorcentual(e).then((response)=>{
+                        await this.mathcalc.CalPorcentual(e).then((response)=>{
 
                             percentual = this.CreateTD(`${response}%`);
                             tr.appendChild(percentual);
                         })
                      
-
-                        tr.appendChild(budname)
+                        tr.appendChild(totalpercentual);
+                        
                   
                         element.appendChild(tr);
     
