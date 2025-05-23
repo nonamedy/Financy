@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Assets/styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"
+  />
     <title>Financy</title>
 </head>
 <body>
@@ -12,7 +17,7 @@
 
         <h1>Orçamento Doméstico</h1>
 
-        <p>Controle seu orçamento doméstico com base em uas próprias metas  rendimentos.</p>
+        <p>Controle seu orçamento doméstico com base em suas próprias metas e  rendimentos.</p>
         
     </header>
 
@@ -20,7 +25,7 @@
 
     <main>
 
-        <input class="input-budgets" type="number" name="" id="">
+        <input class="input-budgets" type="number" name="" id="renda" placeholder="seu salário" min="0">
 
 
         <section class="container-card">
@@ -33,32 +38,8 @@
 
             <article class="card">
 
-                <h2>Resumo</h2>
+                <h2 class="budget-title">Resumo</h2>
 
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Budget</th>
-                            <th>Valor Gasto</th>
-                            <th>Devo Gastar</th>
-                            <th>Utilziado</th>
-                            <th>Total</th>
-                                
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-
-
-                    </tbody>
-
-
-                </table>
 
             </article>
 
@@ -67,32 +48,30 @@
                 <h2>Metas</h2>
 
 
-                <table>
 
-                    <thead>
+               <dialog>
 
-                        <tr></tr>
+                    <article>
 
-                    </thead>
+                        <form id="dialog-form" method="dialog">
+                        
+                        </form>
+                        
+                    </article>
 
-                    <tbody>
-
-
-
-                    </tbody>
-
-                </table>
+               </dialog>
 
             </article>
 
 
         </section>
 
-        <section class="container-card">
+        <section>
 
-            <h2>Edite seus custos</h2>
+            <h3  id="edit" class="budget-title">Edite seus custos</h3>
 
-            <article>
+
+            <article class="budgets-container">
 
 
             </article>
@@ -101,11 +80,18 @@
 
     </main>
 
+
     <footer>
 
+        <h3>Veja meu perfil no  github</h3>
+
+        <a target="_blank"  rel="author" href="https://github.com/nonamedy"><i class="ph-fill ph-github-logo"></i> FJ</a>
 
 
     </footer>
+
+
+    <script type="module" src="../scripts/script.js"></script>
 
 </body>
 </html>

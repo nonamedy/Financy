@@ -11,36 +11,146 @@
 body{
 
     background-color: rgb(34, 34, 34);
+  
+
+}
+a{
+
+
+
+    text-decoration: none;
+    padding:5px;
+}
+a:hover{
+
+    
+    
+    transform: scale(1,1);
+
+   
+    transition: all 0.5s ease-in-out;
+
+}
+
+header{
+
+    margin:5px 0px;
     padding: 20px;
 
 }
 
-/* --------------- classes ------------ */
+main{
 
-.container-card{
-
-    display: flex;
-    flex-direction: row;
+    display:flex;
+    flex-direction: column; 
+    align-items: left;
     flex-wrap: wrap;
-    gap: 15px;
+}
+
+
+
+
+
+
+h2{
+
+    margin:15px 0em 15px;
+
+}
+
+
+
+
+td ,th{
+    padding: 7px;
+    border-bottom: 1px dashed rgb(136, 136, 136); 
+
+}
+
+th {
+    text-align: left;
+    width: 10vw;
+    padding: 7px;
+}
+
+footer{
+
+    background-color:rgb(77, 73, 131);
+    padding:25px;
+    margin-top:65px;
+
+    
     
 
 
 }
 
+footer h3 {
+
+    margin:12px;
+
+}
+
+footer a {
+
+
+    padding-left:26px;
+
+}
+
+
+/* --------------- classes ------------ */
+
+/* Estilo que compôem os estilos dos card*/
+.container-card{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 15px;
+    overflow-x: none;
+    min-width: fit-content;
+    max-height: 50vh;
+    padding-left: 20px;
+    
+
+
+}
+/*Cards. Cada pequena seção separada*/
 .card{
 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 
     background-color: rgba(77, 74, 74, 0.377);
     border-radius: 5px;
     padding: 8px;
-    max-height: 50vh;
+    flex-wrap: wrap;
+
+    
+   
+    
+   
+  
 
 
 }
 
-/* Inputs */
 
+.budgets-container{
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-left: 20px;  
+ 
+ }
+
+/* --- Inputs --- */
+
+/*Estilo dos inputs direcionados aos inputs*/
 .input-budgets{
 
   background-color: rgb(255, 255, 255);
@@ -50,9 +160,11 @@ body{
   border: 1px solid rgba(0, 0, 0, 0.774);
   padding: 4px;
   margin: auto;
+  
 
 }
 
+/*Impede que os inputs tenham o estilo padrão quando focados*/
 .input-budgets:focus{
 
     appearance: none;
@@ -60,5 +172,234 @@ body{
   
   }
 
+/* Botão dos inputs*/
+
+.ph-plus-circle{
+
+
+    font-size:35px;
+
+    position: relative;
+
+    top:25%;
+
+    color:#f4a22fd7;
+ 
+
+}
+
+.ph-plus-circle:hover{
+
+    color:#cf8926d7;
+    cursor: pointer;
+
+
+}
+
+/* -Modal Inputs -*/
+
+.labelmodal{
+
+    display:block;
+    text-align: left;
+}
+
+.inputmodal{
+
+    padding: 5px;
+    text-align: left;
+    width: 58vw;
+
+}
+
+.submitbutton{
+
+    display: blcok;
+    background-color: green;
+    padding: 5px;
+   
+    font-size: 16px;
+
+    border:none;
+    border-radius: 3px;
+    outline:none;
+
+}
+
+
+
+/* --- Complementos --- */
+.complements-container{
+
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap:25px
+
+
+
+}
+
+
+/*Estilo referente ao [Total Gasto,DeveGastar,Percentual] dos complementos*/
+.data-complement{
+
+    font-size: 1.6em;
+    
+    font-weight: 550;
+    text-align: center;
+
+}
+
+/*Estilo referente a mensagem que fica abaixo do [data-complement]*/
+.details-complement{
+
+
+    font-size: 13px;
+
+}
+
+/* Estilo de cor para o [Total Gasto]*/
+#red{
+
+    color: rgb(218, 105, 71);
+
+}
+
+/* Estilo de cor para o [Deve Gastar]*/
+#green{
+
+    color:rgb(24, 134, 48);
+
+}
+
+
+/* --- Tabelas --- */
+
+.tabela-estilos {
+
+    padding: 5px;
+
+
+
+}
+
+
+
+/* Titulos dis budgets*/
+
+.budget-title{
+
+    margin:15px 0em 15px;
+
+}
+
+
+/* Githublogo footer*/
+
+.ph-github-logo{
+
+
+    color: #ffffff;
+    position: relative;
+
+
+    background-color: rgb(29, 28, 28);
+    border-radius: 50px;
+    padding:5px;
+
+    box-shadow: 0px 0px 5px rgba(255, 155, 212, 0.5); 
+
+}
 
 /* ---------------         ------------ */
+
+/* --------------- Ids --------------- */
+
+
+#renda{
+
+    margin:10px;
+    margin-left:20px;
+    font-weight: 350;
+    font-family:'Courier New', Courier, monospace ;
+    
+    align-self: flex-start;
+
+
+    
+
+
+}
+
+#edit-porcent{
+    
+    background-color:#f4a22fd7;
+    color: #483C57;
+
+    font-size:16px;
+
+    padding: 1.5px;
+
+    outline:none;
+    border: none;
+
+    border-radius: 1px ;
+
+}
+
+#edit-porcent:hover{
+
+    cursor: pointer;
+    scale: 1.1;
+        
+}
+
+/* Estilo referente ao modal*/
+
+#modal{
+
+    position: fixed;
+    z-index: 1;
+
+    left:20%;
+    top:25%;
+    width:60%;
+    height: 50%;
+    overflow: auto;
+    text-align: center;
+    font-size: 22px;
+
+    border: none;
+    border-radius: 2px;
+    outline:none;
+
+    background-color: rgb(34, 32, 28);
+
+    padding:10px;
+
+
+}
+
+#modal::backdrop{
+
+    
+    
+    filter: blur(1);
+
+}
+
+#edit{
+
+
+    padding-left: 20px;
+
+}
+
+tr[lineid]{
+
+    background-color: rgba(2, 2, 2, 0)
+
+}
+
