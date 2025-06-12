@@ -18,10 +18,10 @@ export class MathOperation{
             }
 
         })
-        this.porcentagens = this.db.OpenTransaction('porcentagens','readonly')
+        this.porcentagens = this.db.OpenTransaction('porcentagens','readonly','','key')
 
         this.porcentagens.then((response) =>{
-            console.log(response)
+        
             if(response === undefined){
 
                 this.porcentagens = 0;
@@ -41,7 +41,7 @@ export class MathOperation{
 
         await this.db.Index(budname).then((response) =>{
 
-
+            response = this.FiltraBuds(response);
 
             response.forEach((obj) =>{
        
@@ -159,4 +159,18 @@ export class MathOperation{
 
     };
 
+    FiltraBuds(array){
+
+                  
+        if( array !== undefined ){
+
+            let filtro = array.filter((e) => e.data == this.db.GetDate());
+            
+            return(filtro)
+            
+
+
+        } else {window.alert('aabou')}
+
+    };
 };

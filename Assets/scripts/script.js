@@ -12,28 +12,6 @@ eventos.EventosParaARenda();
 
 
 
-
-
-
-
-function cria_database(){
-
-    
-   let dbrequest = banco.CreateDB(1);
-   console.log(dbrequest);
-
-
-   
-
-
-
-};
-
-
-
-
-
-
 class teste{
 
     constructor(){
@@ -65,7 +43,7 @@ class teste{
         
         
         let table1 = this.tabela.CreateTable(3,1,['Nome','Valor'],tableData,true);
-        console.log(table1)
+  
         let component  = this.componentes.CreateComponent(BudgetName,table1);
         let addinfo = this.infoadicional.CreateComplement(false,BudgetName);
 
@@ -195,6 +173,6 @@ sla.fixedbudgets.forEach((e) => {
 
 })
 
-console.log(sla)
-eventos.EventosCarregarTabelas(sla.dbrequest,sla.fixedbudgets)
+
+
 
