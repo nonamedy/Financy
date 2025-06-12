@@ -1,18 +1,13 @@
 import { Table,components,AdicionalInfo} from "../scripts/modules/CreateElemens/elements.mjs";
 import {  DataBase } from "../scripts/modules/database/db.mjs";
 import { InputEvents } from "../scripts/modules/HtmlEvents/events.mjs";
-import {  MathOperation } from "../scripts/modules/MathOperations/math.mjs";
+import { MathOperation } from "../scripts/modules/MathOperations/math.mjs";
+
 let bud = document.querySelector('.budgets-container');
 
-
 const renda = document.querySelector('#renda');
-const eventos = new InputEvents(renda);
-eventos.EventosParaARenda();
 
-
-
-
-class teste{
+class main{
 
     constructor(){
 
@@ -23,7 +18,7 @@ class teste{
         this.eventoss = new InputEvents(renda);
         this.MathCalcs = new MathOperation();
         this.fixedbudgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
-
+        this.rendaevento = this.eventoss.EventosParaARenda();
         
     };
 
@@ -32,7 +27,8 @@ class teste{
     const budgets = ['Gastos Fixos','Investimentos','Metas','prazeres'];
   
     let tabelaresumo = this.tabela.CreateTable(budgets.length,1,['Budget','Valor Gasto','Deve Gastar','Utilizado','Total'],[budgets],'overview')
-    let addinfo = this.infoadicional.CreateComplement(true,'overview',this.fixedbudgets);
+        let addinfo = this.infoadicional.CreateComplement(true, 'overview', this.fixedbudgets);
+        
     document.querySelectorAll('.card')[1].appendChild(tabelaresumo);
     document.querySelectorAll('.card')[1].appendChild(addinfo);
 
@@ -40,8 +36,6 @@ class teste{
 
     CreateBudgets(BudgetName,tableData){
 
-        
-        
         let table1 = this.tabela.CreateTable(3,1,['Nome','Valor'],tableData,true);
   
         let component  = this.componentes.CreateComponent(BudgetName,table1);
@@ -49,8 +43,6 @@ class teste{
 
         component.appendChild(addinfo);
     
-        
-
         return component
     };
 
@@ -61,13 +53,11 @@ class teste{
         let table =this.tabela.CreateTable(this.fixedbudgets.length,1,[],[this.fixedbudgets],'metas'  )
 
         let editbutton = this.CreateGoalsModal();
-        eventos.EventosModal(editbutton,this.fixedbudgets,this.dbrequest);
+        this.eventoss.EventosModal(editbutton,this.fixedbudgets,this.dbrequest);
        
         
-
         container.appendChild(table);
         container.appendChild(editbutton);
-
 
     };
 
@@ -141,38 +131,37 @@ class teste{
 
     }
 
-    TDtest(){
+    async DBtest(){
 
-        this.dbrequest = this.database.CreateDB(1)
-        return this
+        this.dbrequest = await this.database.CreateDB(1)
+        return this.dbrequest;
     };
 
-}
+    PrintBudgets(){
 
-const sla = new teste()
-const dbrequest = sla.TDtest()
-sla.CreateOverview()
-sla.CreateGoals()
-// cria os budgets
-sla.fixedbudgets.forEach((e) => {
+        this.fixedbudgets.forEach((e) => {
 
-    let valor = eventos.EventosCarregarTabelas(sla.dbrequest,e)
-
-    valor.then((response) => {
+        let valor = this.eventoss.EventosCarregarTabelas(this.DBtest(),e)
+  
+        valor.then((response) => {
         // response -> array com os objetos [{},{},{}] || []
         
-        let container = sla.CreateBudgets(e,response)
-        eventos.EventosParaBotoes(container,dbrequest)
+            let container = this.CreateBudgets(e, response);
+            this.eventoss.EventosParaBotoes(container, dbrequest);
 
 
-    })
+            })
    
-    
-    
-  
 
-})
+        })
 
+    }
 
+};
 
+const app = new main();
+
+app.CreateOverview();
+app.CreateGoals();
+app.PrintBudgets();
 
