@@ -9,6 +9,7 @@ export class events{
 
         this.element = element;
         this.tabela = new Table('table',element,'')
+        this.db = new DataBase('Teste',1);
     };
 
 };
@@ -18,7 +19,7 @@ export class InputEvents extends events{
 
     EventosParaARenda(){
 
-        console.log('?')
+        
         this.element.addEventListener('change',(e) => {
 
             database.OpenTransaction('renda','readwrite',{renda:this.element.value,data:database.GetDate()});
@@ -71,7 +72,7 @@ export class InputEvents extends events{
         for(let porcent in response){
 
 
-            console.log(porcent)
+         
 
         }
 
@@ -161,11 +162,15 @@ export class InputEvents extends events{
             
                 request.onsuccess = () => {
 
-                    if(request.result !== undefined){
+                    
+                    
+                    if(request.result !== undefined ){
 
-                      
+                       let filtro = request.result.filter((e) => e.data == database.GetDate());
+                       
+                        resolve(filtro)
                         
-                        resolve(request.result)
+            
 
                     } else {window.alert('aabou')}
                     
@@ -226,7 +231,7 @@ export class InputEvents extends events{
 
             tot.textContent =`Total:${total}%`
 
-            console.log(e)
+          
 
         })
 
