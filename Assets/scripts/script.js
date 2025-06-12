@@ -147,7 +147,7 @@ class main{
         // response -> array com os objetos [{},{},{}] || []
         
             let container = this.CreateBudgets(e, response);
-            this.eventoss.EventosParaBotoes(container, dbrequest);
+            this.eventoss.EventosParaBotoes(container, this.DBtest());
 
 
             })
