@@ -10,11 +10,11 @@ Ajuste suas despezas de acordo com suas metas e renda.
 - [ ] Alterar/deletar os budgets.
 - [ ] Alterar entre os meses cadastrados.
 - [ ] Atualizar todos os valores(R$)autoamticamente em qualquer mduança
-
+- [ ] Correção de responsividade ( Mobile )
 
 ### Inspiração
 
-Desenvolvi este projeto depois de ter asistido um vídeo sobre controle financeiro, Vi este mesmo porgrama e me desafiei a fezê-lo. 
+Desenvolvi este projeto depois de ter asistido um vídeo sobre controle financeiro, vi este mesmo programa e me desafiei a fezê-lo. 
 
 Recomendo fortemente que você que está lendo dê uma olhada.
 
